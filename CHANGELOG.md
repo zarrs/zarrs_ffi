@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Bump `zarrs` to 0.20.0-beta.0
+
 ## [0.9.1] - 2025-02-24
 
 ### Changed
@@ -68,7 +71,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
  - Add `Dockerfile` for cmake example
  - Add `all_codecs` feature
 
-### Changed 
+### Changed
  - Fetch deps at configure time in `Findzarrs.cmake`
 
 ## [0.8.0] - 2024-08-05

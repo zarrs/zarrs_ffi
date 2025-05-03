@@ -314,8 +314,9 @@ pub unsafe extern "C" fn zarrsArrayRetrieveSubsetSharded(
     let cache = &**cache;
     let subset_start = std::slice::from_raw_parts(pSubsetStart, dimensionality);
     let subset_shape = std::slice::from_raw_parts(pSubsetShape, dimensionality);
-    let array_subset =
-        ArraySubset::new_with_start_shape_unchecked(subset_start.to_vec(), subset_shape.to_vec());
+    let array_subset = ArraySubset::from(
+        std::iter::zip(subset_start, subset_shape).map(|(&start, &shape)| start..start + shape),
+    );
 
     // Get the subset bytes
     match array {

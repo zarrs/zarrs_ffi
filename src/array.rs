@@ -306,11 +306,11 @@ pub unsafe extern "C" fn zarrsArrayGetChunksInSubset(
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
     let array = &**array;
-    let pSubsetStart = unsafe { std::slice::from_raw_parts(pSubsetStart, dimensionality) };
-    let pSubsetShape = unsafe { std::slice::from_raw_parts(pSubsetShape, dimensionality) };
-    let array_subset = unsafe {
-        ArraySubset::new_with_start_shape_unchecked(pSubsetStart.to_vec(), pSubsetShape.to_vec())
-    };
+    let subset_start = unsafe { std::slice::from_raw_parts(pSubsetStart, dimensionality) };
+    let subset_shape = unsafe { std::slice::from_raw_parts(pSubsetShape, dimensionality) };
+    let array_subset = ArraySubset::from(
+        std::iter::zip(subset_start, subset_shape).map(|(&start, &shape)| start..start + shape),
+    );
     let shape = array_fn!(array, chunks_in_array_subset, &array_subset);
     if let Ok(Some(chunks_subset)) = shape {
         let pChunksStart = unsafe { std::slice::from_raw_parts_mut(pChunksStart, dimensionality) };
