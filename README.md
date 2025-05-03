@@ -6,11 +6,11 @@
 ![msrv](https://img.shields.io/crates/msrv/zarrs_ffi)
 [![build](https://github.com/LDeakin/zarrs_ffi/actions/workflows/ci.yml/badge.svg)](https://github.com/LDeakin/zarrs_ffi/actions/workflows/ci.yml)
 
-C/C++ bindings for the [zarrs] crate, a Rust library for the [Zarr](https://zarr.dev) storage format for multidimensional arrays and metadata.
+C/C++ bindings for the [`zarrs`] crate, a Rust library for the [Zarr](https://zarr.dev) storage format for multidimensional arrays and metadata.
 
 `zarrs_ffi` is a single header library: `zarrs.h` [(docs)](https://ldeakin.github.io/zarrs_ffi/zarrs_8h.html).
 
-Currently `zarrs_ffi` only supports a small subset of the [zarrs] API.
+Currently `zarrs_ffi` only supports a small subset of the [`zarrs`] API.
 
 A changelog can be found [here](https://github.com/LDeakin/zarrs_ffi/blob/main/CHANGELOG.md).
 
@@ -48,8 +48,8 @@ See a more comprehensive example in the [examples](https://github.com/LDeakin/za
 2. Put [Findzarrs.cmake](https://github.com/LDeakin/zarrs_ffi/blob/main/examples/cmake_project/Findzarrs.cmake) in your `CMAKE_MODULE_PATH`
 3. `find_package(zarrs <version> REQUIRED COMPONENTS zarrs/bz2)`
    - Replace `<version>` with the latest release: [![Latest Version](https://img.shields.io/crates/v/zarrs_ffi.svg)](https://crates.io/crates/zarrs_ffi) (e.g., `0.9` or `0.9.1`)
-   - [zarrs] is retrieved from `GitHub` using [FetchContent](https://cmake.org/cmake/help/latest/module/FetchContent.html) and built using [corrosion](https://github.com/corrosion-rs/corrosion)
-   - Components are optional [zarrs] codecs
+   - [`zarrs`] is retrieved from `GitHub` using [FetchContent](https://cmake.org/cmake/help/latest/module/FetchContent.html) and built using [corrosion](https://github.com/corrosion-rs/corrosion)
+   - Components are optional [`zarrs`] codecs
 4. the `zarrs_ffi` library is available as the `zarrs::zarrs` or  `zarrs::zarrs-static` target
 
 A complete `CMake` example can be found in [examples/cmake_project](https://github.com/LDeakin/zarrs_ffi/tree/main/examples/cmake_project).
@@ -84,4 +84,4 @@ cargo build --release --features cbindgen --features zarrs/zstd,zarrs/bitround,z
 
 Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.
 
-[zarrs]: https://github.com/LDeakin/zarrs
+[`zarrs`]: https://github.com/LDeakin/zarrs
