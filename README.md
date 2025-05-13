@@ -1,14 +1,14 @@
 # zarrs_ffi
 
 [![Latest Version](https://img.shields.io/crates/v/zarrs_ffi.svg)](https://crates.io/crates/zarrs_ffi)
-[![zarrs documentation](https://img.shields.io/badge/docs-Doxygen-green)](https://ldeakin.github.io/zarrs_ffi/)
+[![zarrs_ffi documentation](https://img.shields.io/badge/docs-Doxygen-green)](https://zarrs.dev/zarrs_ffi/)
 [![zarrs documentation](https://img.shields.io/badge/docs-docs.rs-green)](https://docs.rs/zarrs_ffi)
 ![msrv](https://img.shields.io/crates/msrv/zarrs_ffi)
 [![build](https://github.com/LDeakin/zarrs_ffi/actions/workflows/ci.yml/badge.svg)](https://github.com/LDeakin/zarrs_ffi/actions/workflows/ci.yml)
 
 C/C++ bindings for the [`zarrs`] crate, a Rust library for the [Zarr](https://zarr.dev) storage format for multidimensional arrays and metadata.
 
-`zarrs_ffi` is a single header library: `zarrs.h` [(docs)](https://ldeakin.github.io/zarrs_ffi/zarrs_8h.html).
+`zarrs_ffi` is a single header library: `zarrs.h` [(docs)](https://zarrs.dev/zarrs_ffi/zarrs_8h.html).
 
 Currently `zarrs_ffi` only supports a small subset of the [`zarrs`] API.
 

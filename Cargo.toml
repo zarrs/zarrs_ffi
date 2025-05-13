@@ -6,7 +6,8 @@ authors = ["Lachlan Deakin <ljdgit@gmail.com>"]
 edition = "2021"
 rust-version = "1.82"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/LDeakin/zarrs_ffi"
+repository = "https://github.com/zarrs/zarrs_ffi"
+documentation = "https://zarrs.dev/zarrs_ffi"
 keywords = ["zarr"]
 categories = ["encoding"]
 
