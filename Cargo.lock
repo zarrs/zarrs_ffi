@@ -237,9 +237,9 @@ dependencies = [
 
 [[package]]
 name = "cc"
-version = "1.2.22"
+version = "1.2.23"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "32db95edf998450acc7881c932f94cd9b05c87b4b2599e8bab064753da4acfd1"
+checksum = "5f4ac86a9e5bc1e2b3449ab9d7d3a6a405e3d1bb28d7b9be8614f55846ae3766"
 dependencies = [
  "jobserver",
  "libc",
@@ -1979,9 +1979,9 @@ dependencies = [
 
 [[package]]
 name = "zarrs"
-version = "0.20.0-beta.2"
+version = "0.20.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "66b260fe35fe52a34cae9819fa6a160222e448ad258d4c1ad02e830b18208c2d"
+checksum = "68797789128107ed02c246573d1218670fed84e2042f6728ea9ca756ecee2683"
 dependencies = [
  "async-lock",
  "blosc-src",
