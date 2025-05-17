@@ -94,10 +94,10 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
   <div class="headertitle"><div class="title">zarrs_ffi </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> <a href="https://crates.io/crates/zarrs_ffi"><img src="https://img.shields.io/crates/v/zarrs_ffi.svg" alt="Latest Version" style="pointer-events: none;" class="inline"/></a> <a href="https://ldeakin.github.io/zarrs_ffi/"><img src="https://img.shields.io/badge/docs-Doxygen-green" alt="zarrs documentation" class="inline"/></a> <a href="https://docs.rs/zarrs_ffi"><img src="https://img.shields.io/badge/docs-docs.rs-green" alt="zarrs documentation" class="inline"/></a> <img src="https://img.shields.io/crates/msrv/zarrs_ffi" alt="msrv" class="inline"/> <a href="https://github.com/LDeakin/zarrs_ffi/actions/workflows/ci.yml"><img src="https://github.com/LDeakin/zarrs_ffi/actions/workflows/ci.yml/badge.svg" alt="build" style="pointer-events: none;" class="inline"/></a></p>
-<p>C/C++ bindings for the <a href="https://github.com/LDeakin/zarrs">zarrs</a> crate, a Rust library for the <a href="https://zarr.dev">Zarr</a> storage format for multidimensional arrays and metadata.</p>
-<p><code>zarrs_ffi</code> is a single header library: <code><a class="el" href="zarrs_8h.html">zarrs.h</a></code> <a href="https://ldeakin.github.io/zarrs_ffi/zarrs_8h.html">(docs)</a>.</p>
-<p>Currently <code>zarrs_ffi</code> only supports a small subset of the <a href="https://github.com/LDeakin/zarrs">zarrs</a> API.</p>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> <a href="https://crates.io/crates/zarrs_ffi"><img src="https://img.shields.io/crates/v/zarrs_ffi.svg" alt="Latest Version" style="pointer-events: none;" class="inline"/></a> <a href="https://zarrs.dev/zarrs_ffi/"><img src="https://img.shields.io/badge/docs-Doxygen-green" alt="zarrs_ffi documentation" class="inline"/></a> <a href="https://docs.rs/zarrs_ffi"><img src="https://img.shields.io/badge/docs-docs.rs-green" alt="zarrs documentation" class="inline"/></a> <img src="https://img.shields.io/crates/msrv/zarrs_ffi" alt="msrv" class="inline"/> <a href="https://github.com/LDeakin/zarrs_ffi/actions/workflows/ci.yml"><img src="https://github.com/LDeakin/zarrs_ffi/actions/workflows/ci.yml/badge.svg" alt="build" style="pointer-events: none;" class="inline"/></a></p>
+<p>C/C++ bindings for the <a href="https://github.com/LDeakin/zarrs"><code>zarrs</code></a> crate, a Rust library for the <a href="https://zarr.dev">Zarr</a> storage format for multidimensional arrays and metadata.</p>
+<p><code>zarrs_ffi</code> is a single header library: <code><a class="el" href="zarrs_8h.html">zarrs.h</a></code> <a href="https://zarrs.dev/zarrs_ffi/zarrs_8h.html">(docs)</a>.</p>
+<p>Currently <code>zarrs_ffi</code> only supports a small subset of the <a href="https://github.com/LDeakin/zarrs"><code>zarrs</code></a> API.</p>
 <p>A changelog can be found <a href="https://github.com/LDeakin/zarrs_ffi/blob/main/CHANGELOG.md">here</a>.</p>
 <h1><a class="anchor" id="autotoc_md47"></a>
 Example</h1>
@@ -141,9 +141,9 @@ CMake Quickstart</h1>
 <li>Install the Rust compiler (and cargo).</li>
 <li>Put <a href="https://github.com/LDeakin/zarrs_ffi/blob/main/examples/cmake_project/Findzarrs.cmake">Findzarrs.cmake</a> in your <code>CMAKE_MODULE_PATH</code></li>
 <li><code>find_package(zarrs &lt;version&gt; REQUIRED COMPONENTS zarrs/bz2)</code><ul>
-<li>Replace <code>&lt;version&gt;</code> with the latest release: <a href="https://crates.io/crates/zarrs_ffi"><img src="https://img.shields.io/crates/v/zarrs_ffi.svg" alt="Latest Version" style="pointer-events: none;" class="inline"/></a> (e.g., <code>0.9</code> or <code>0.9.1</code>)</li>
-<li><a href="https://github.com/LDeakin/zarrs">zarrs</a> is retrieved from <code>GitHub</code> using <a href="https://cmake.org/cmake/help/latest/module/FetchContent.html">FetchContent</a> and built using <a href="https://github.com/corrosion-rs/corrosion">corrosion</a></li>
-<li>Components are optional <a href="https://github.com/LDeakin/zarrs">zarrs</a> codecs</li>
+<li>Replace <code>&lt;version&gt;</code> with the latest release: <a href="https://crates.io/crates/zarrs_ffi"><img src="https://img.shields.io/crates/v/zarrs_ffi.svg" alt="Latest Version" style="pointer-events: none;" class="inline"/></a> (e.g., <code>0.9</code> or <code>0.9.2</code>)</li>
+<li><a href="https://github.com/LDeakin/zarrs"><code>zarrs</code></a> is retrieved from <code>GitHub</code> using <a href="https://cmake.org/cmake/help/latest/module/FetchContent.html">FetchContent</a> and built using <a href="https://github.com/corrosion-rs/corrosion">corrosion</a></li>
+<li>Components are optional <a href="https://github.com/LDeakin/zarrs"><code>zarrs</code></a> codecs</li>
 </ul>
 </li>
 <li>the <code>zarrs_ffi</code> library is available as the <code>zarrs::zarrs</code> or <code>zarrs::zarrs-static</code> target</li>
