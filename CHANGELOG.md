@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.9.2] - 2025-05-17
+
 ### Changed
 - Bump `zarrs` to 0.20.0
 - Update URLs to point to new `zarrs` GitHub organisation
@@ -187,7 +189,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
  - Initial public release
 
-[unreleased]: https://github.com/LDeakin/zarrs_ffi/compare/v0.9.1...HEAD
+[unreleased]: https://github.com/LDeakin/zarrs_ffi/compare/v0.9.2...HEAD
+[0.9.2]: https://github.com/LDeakin/zarrs_ffi/releases/tag/v0.9.2
 [0.9.1]: https://github.com/LDeakin/zarrs_ffi/releases/tag/v0.9.1
 [0.9.0]: https://github.com/LDeakin/zarrs_ffi/releases/tag/v0.9.0
 [0.8.5]: https://github.com/LDeakin/zarrs_ffi/releases/tag/v0.8.5
