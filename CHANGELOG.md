@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Bump `zarrs` to 0.21.2
+- Bump `cbindgen` to 0.29
 - Move `cmake` example up from `./examples/cmake_project` into `./examples`
 - Allocate using the element type rather than bytes in the examples
 
