@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Move `cmake` example up from `./examples/cmake_project` into `./examples`
+
 ## [0.9.2] - 2025-05-17
 
 ### Changed

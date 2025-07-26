@@ -6,6 +6,6 @@ WORKDIR /example
 
 COPY . .
 
-WORKDIR /example/cmake_project/build
+WORKDIR /example/build
 RUN cmake -DCMAKE_BUILD_TYPE=Release .. && make
 ENTRYPOINT [ "./main" ]

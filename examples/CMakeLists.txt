@@ -4,5 +4,5 @@ project(zarrs_ffi_cmake_example VERSION 0.1.0)
 LIST(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}")
 find_package(zarrs 0.9 REQUIRED COMPONENTS zarrs/bz2)
 
-add_executable(main ../array_write_read.cpp)
+add_executable(main array_write_read.cpp)
 target_link_libraries(main zarrs::zarrs)
