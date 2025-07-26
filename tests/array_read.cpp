@@ -20,23 +20,22 @@ int main() {
   uint8_t *subset_bytes = reinterpret_cast<uint8_t *>(subset_elements);
   zarrs_assert(zarrsArrayStoreSubset(array, 2, subset_start, subset_shape, 4 * sizeof(float), subset_bytes));
 
-  // Get the chunk size
+  // Get the chunk size (in bytes)
   size_t indices[] = {0, 0};
   size_t chunk_size;
   zarrs_assert(zarrsArrayGetChunkSize(array, 2, indices, &chunk_size));
   std::cout << chunk_size << std::endl;
 
-  // Get chunk bytes
-  std::unique_ptr<uint8_t[]> chunk_bytes(new uint8_t[chunk_size]);
-  zarrs_assert(zarrsArrayRetrieveChunk(array, 2, indices, chunk_size, chunk_bytes.get()));
+  // Get chunk elements
+  std::unique_ptr<float[]> chunk_elements(new float[chunk_size / sizeof(float)]);
+  zarrs_assert(zarrsArrayRetrieveChunk(array, 2, indices, chunk_size, reinterpret_cast<uint8_t*>(chunk_elements.get())));
 
   // Print the elements
-  auto chunk_elements = reinterpret_cast<float *>(chunk_bytes.get());
   for (size_t i = 0; i < chunk_size / sizeof(float); ++i) {
     std::cout << (i == 0 ? "" : " ") << chunk_elements[i];
   }
   std::cout << std::endl;
-  chunk_bytes.reset();
+  chunk_elements.reset();
 
   // Cleanup
   zarrs_assert(zarrsDestroyArray(array));

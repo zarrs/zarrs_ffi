@@ -111,7 +111,7 @@ int main() {
   assert(subset_size == 4 * sizeof(float));
   zarrs_assert(zarrsArrayStoreSubset(array, 2, subset_start, subset_shape, 4 * sizeof(float), subset_bytes));
 
-  // Get the chunk size and shape
+  // Get the chunk size (in bytes) and shape
   size_t indices[] = {0, 0};
   size_t chunk_size;
   zarrs_assert(zarrsArrayGetChunkSize(array, 2, indices, &chunk_size));
@@ -125,17 +125,16 @@ int main() {
   assert(chunk_shape[0] == 4);
   assert(chunk_shape[1] == 4);
 
-  // Get chunk bytes
-  std::unique_ptr<uint8_t[]> chunk_bytes(new uint8_t[chunk_size]);
-  zarrs_assert(zarrsArrayRetrieveChunk(array, 2, indices, chunk_size, chunk_bytes.get()));
+  // Get chunk elements
+  std::unique_ptr<float[]> chunk_elements(new float[chunk_size / sizeof(float)]);
+  zarrs_assert(zarrsArrayRetrieveChunk(array, 2, indices, chunk_size, reinterpret_cast<uint8_t*>(chunk_elements.get())));
 
   // Print the elements
-  auto chunk_elements = reinterpret_cast<float *>(chunk_bytes.get());
   for (size_t i = 0; i < chunk_size / sizeof(float); ++i) {
     std::cout << (i == 0 ? "" : " ") << chunk_elements[i];
   }
   std::cout << std::endl;
-  chunk_bytes.reset();
+  chunk_elements.reset();
 
   // Cleanup
   zarrs_assert(zarrsDestroyArray(array));
