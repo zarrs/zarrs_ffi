@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- Bump `zarrs` to 0.21.2
 - Move `cmake` example up from `./examples/cmake_project` into `./examples`
+- Allocate using the element type rather than bytes in the examples
+
+### Fixed
+- Bump `Dockerfile` to Rust 1.82 to match the MSRV
+- Fix incorrect `zarrsOpenArrayRW` usage in README
 
 ## [0.9.2] - 2025-05-17
 
