@@ -96,7 +96,7 @@ pub unsafe extern "C" fn zarrsArrayStoreChunk(
     };
     if chunkBytesCount != chunk_size {
         *LAST_ERROR.lock().unwrap() =
-                        format!("zarrsArrayRetrieveChunk chunk_bytes_length {chunkBytesCount} does not match expected length {}", chunk_size);
+                        format!("zarrsArrayRetrieveChunk chunk_bytes_length {chunkBytesCount} does not match expected length {chunk_size}");
         return ZarrsResult::ZARRS_ERROR_BUFFER_LENGTH;
     }
 

@@ -20,9 +20,7 @@ fn main() {
     let include_dir = include_dir.as_path().to_string_lossy();
 
     println!(
-        "cargo:rustc-env=INLINE_C_RS_CFLAGS=-I{I} -L{L} -D_DEBUG -D_CRT_SECURE_NO_WARNINGS",
-        I = include_dir,
-        L = shared_object_dir,
+        "cargo:rustc-env=INLINE_C_RS_CFLAGS=-I{include_dir} -L{shared_object_dir} -D_DEBUG -D_CRT_SECURE_NO_WARNINGS",
     );
 
     println!(
