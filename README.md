@@ -25,7 +25,7 @@ void main() {
 
   // Open an array in the hierarchy
   ZarrsArray array = nullptr;
-  zarrsOpenArrayRW(storage, "/array", metadata, &array);
+  zarrs_assert(zarrsOpenArrayRW(storage, "/array", &array));
 
   // Get the array dimensionality
   size_t dimensionality;
