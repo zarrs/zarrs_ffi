@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Bump `cbindgen` to 0.29
 - Move `cmake` example up from `./examples/cmake_project` into `./examples`
 - Allocate using the element type rather than bytes in the examples
+- Rename `zarrsArrayGetAttributesString` to `zarrsArrayGetAttributes`
+  - `zarrsArrayGetAttributesString` is deprecated and will be removed in a future breaking release
 
 ### Fixed
 - Bump `Dockerfile` to Rust 1.82 to match the MSRV

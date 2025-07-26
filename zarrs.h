@@ -112,6 +112,16 @@ extern "C" {
  * # Safety
  * `array` must be a valid `ZarrsArray` handle.
  */
+ZarrsResult zarrsArrayGetAttributes(ZarrsArray array, bool pretty, char **pAttributesString);
+
+/**
+ * Get the array attributes as a JSON string.
+ *
+ * The string must be freed with `zarrsFreeString`.
+ *
+ * # Safety
+ * `array` must be a valid `ZarrsArray` handle.
+ */
 ZarrsResult zarrsArrayGetAttributesString(ZarrsArray array, bool pretty, char **pAttributesString);
 
 /**

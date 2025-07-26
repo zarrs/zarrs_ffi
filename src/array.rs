@@ -513,7 +513,7 @@ pub unsafe extern "C" fn zarrsArrayGetMetadataString(
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
 #[no_mangle]
-pub unsafe extern "C" fn zarrsArrayGetAttributesString(
+pub unsafe extern "C" fn zarrsArrayGetAttributes(
     array: ZarrsArray,
     pretty: bool,
     pAttributesString: *mut *mut c_char,
@@ -539,6 +539,21 @@ pub unsafe extern "C" fn zarrsArrayGetAttributesString(
 
     *LAST_ERROR.lock().unwrap() = "error converting attributes to a json string".to_string();
     ZarrsResult::ZARRS_ERROR_INVALID_METADATA
+}
+
+/// Get the array attributes as a JSON string.
+///
+/// The string must be freed with `zarrsFreeString`.
+///
+/// # Safety
+/// `array` must be a valid `ZarrsArray` handle.
+#[no_mangle]
+pub unsafe extern "C" fn zarrsArrayGetAttributesString(
+    array: ZarrsArray,
+    pretty: bool,
+    pAttributesString: *mut *mut c_char,
+) -> ZarrsResult {
+    zarrsArrayGetAttributes(array, pretty, pAttributesString)
 }
 
 /// Set the array attributes from a JSON string.
