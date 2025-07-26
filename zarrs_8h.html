@@ -141,6 +141,8 @@ Typedefs</h2></td></tr>
 <tr class="separator:a33440b28bddcad5e68aa86b3abddb3bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf976c06473973c866c0b5f1a2791352" id="r_adf976c06473973c866c0b5f1a2791352"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="zarrs_8h.html#adf976c06473973c866c0b5f1a2791352">ZarrsArray_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#adf976c06473973c866c0b5f1a2791352">ZarrsArray_T</a></td></tr>
 <tr class="separator:adf976c06473973c866c0b5f1a2791352"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a628ea1605a5cb5f20dac39d8ac661784" id="r_a628ea1605a5cb5f20dac39d8ac661784"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="zarrs_8h.html#a628ea1605a5cb5f20dac39d8ac661784">ZarrsGroup_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a628ea1605a5cb5f20dac39d8ac661784">ZarrsGroup_T</a></td></tr>
+<tr class="separator:a628ea1605a5cb5f20dac39d8ac661784"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e16e293255bf2d1d430cc5db45cb008" id="r_a5e16e293255bf2d1d430cc5db45cb008"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="zarrs_8h.html#a5e16e293255bf2d1d430cc5db45cb008">ZarrsShardIndexCache_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a5e16e293255bf2d1d430cc5db45cb008">ZarrsShardIndexCache_T</a></td></tr>
 <tr class="separator:a5e16e293255bf2d1d430cc5db45cb008"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abee589baad0036de528126d46f2fc10c" id="r_abee589baad0036de528126d46f2fc10c"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="zarrs_8h.html#abee589baad0036de528126d46f2fc10c">ZarrsStorage_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#abee589baad0036de528126d46f2fc10c">ZarrsStorage_T</a></td></tr>
@@ -151,6 +153,8 @@ Typedefs</h2></td></tr>
 <tr class="separator:ae509c4ce82d2c01d9365769562634126"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ad1df5ad00272f307ec86b1ada6de38" id="r_a2ad1df5ad00272f307ec86b1ada6de38"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="zarrs_8h.html#abee589baad0036de528126d46f2fc10c">ZarrsStorage_T</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a2ad1df5ad00272f307ec86b1ada6de38">ZarrsStorage</a></td></tr>
 <tr class="separator:a2ad1df5ad00272f307ec86b1ada6de38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ac6b9c37b2a28b3960d442f26426cda" id="r_a4ac6b9c37b2a28b3960d442f26426cda"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="zarrs_8h.html#a628ea1605a5cb5f20dac39d8ac661784">ZarrsGroup_T</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a4ac6b9c37b2a28b3960d442f26426cda">ZarrsGroup</a></td></tr>
+<tr class="separator:a4ac6b9c37b2a28b3960d442f26426cda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
@@ -196,12 +200,15 @@ Enumerations</h2></td></tr>
 , <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a160e034dab83d174bac8be870e7dd013">ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS</a> = -11
 , <br />
 &#160;&#160;<a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5af3c4e6147489571c36f76b92268ef9f8">ZARRS_ERROR_UNSUPPORTED_DATA_TYPE</a> = -12
+, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5ad785e83d75b9078d5c9e27b762e4882a">ZARRS_ERROR_GROUP</a> = -13
 <br />
  }</td></tr>
 <tr class="separator:a05a3292fce4b0aa50a20f784f3cef3d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a4130d1ef70418af1fed44af956d5626d" id="r_a4130d1ef70418af1fed44af956d5626d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a4130d1ef70418af1fed44af956d5626d">zarrsArrayGetAttributes</a> (<a class="el" href="zarrs_8h.html#a0d8c332996c42c863307e64a81f2109d">ZarrsArray</a> array, bool pretty, char **pAttributesString)</td></tr>
+<tr class="separator:a4130d1ef70418af1fed44af956d5626d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec3f21673030c3b6be603192c02da235" id="r_aec3f21673030c3b6be603192c02da235"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#aec3f21673030c3b6be603192c02da235">zarrsArrayGetAttributesString</a> (<a class="el" href="zarrs_8h.html#a0d8c332996c42c863307e64a81f2109d">ZarrsArray</a> array, bool pretty, char **pAttributesString)</td></tr>
 <tr class="separator:aec3f21673030c3b6be603192c02da235"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7afeb22e360802a030254b1f96a9e3b3" id="r_a7afeb22e360802a030254b1f96a9e3b3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a7afeb22e360802a030254b1f96a9e3b3">zarrsArrayGetChunkGridShape</a> (<a class="el" href="zarrs_8h.html#a0d8c332996c42c863307e64a81f2109d">ZarrsArray</a> array, size_t dimensionality, uint64_t *pChunkGridShape)</td></tr>
@@ -246,22 +253,34 @@ Functions</h2></td></tr>
 <tr class="separator:ae1253082428887bef9ebb25d870fb962"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af74104b956eabca022a37daf30592c91" id="r_af74104b956eabca022a37daf30592c91"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#af74104b956eabca022a37daf30592c91">zarrsCreateArrayRW</a> (<a class="el" href="zarrs_8h.html#a2ad1df5ad00272f307ec86b1ada6de38">ZarrsStorage</a> storage, const char *path, const char *metadata, <a class="el" href="zarrs_8h.html#a0d8c332996c42c863307e64a81f2109d">ZarrsArray</a> *pArray)</td></tr>
 <tr class="separator:af74104b956eabca022a37daf30592c91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6db6aa2610891f4ceaea937b52b4ffd0" id="r_a6db6aa2610891f4ceaea937b52b4ffd0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a6db6aa2610891f4ceaea937b52b4ffd0">zarrsCreateGroupRW</a> (<a class="el" href="zarrs_8h.html#a2ad1df5ad00272f307ec86b1ada6de38">ZarrsStorage</a> storage, const char *path, const char *metadata, <a class="el" href="zarrs_8h.html#a4ac6b9c37b2a28b3960d442f26426cda">ZarrsGroup</a> *pGroup)</td></tr>
+<tr class="separator:a6db6aa2610891f4ceaea937b52b4ffd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a44d90188907fc1bc7829b4b827bbb7b6" id="r_a44d90188907fc1bc7829b4b827bbb7b6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a44d90188907fc1bc7829b4b827bbb7b6">zarrsCreateShardIndexCache</a> (<a class="el" href="zarrs_8h.html#a0d8c332996c42c863307e64a81f2109d">ZarrsArray</a> array, <a class="el" href="zarrs_8h.html#ae509c4ce82d2c01d9365769562634126">ZarrsShardIndexCache</a> *pShardIndexCache)</td></tr>
 <tr class="separator:a44d90188907fc1bc7829b4b827bbb7b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5f1234db5258d233d8562b4fe001b43" id="r_ae5f1234db5258d233d8562b4fe001b43"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#ae5f1234db5258d233d8562b4fe001b43">zarrsCreateStorageFilesystem</a> (const char *path, <a class="el" href="zarrs_8h.html#a2ad1df5ad00272f307ec86b1ada6de38">ZarrsStorage</a> *pStorage)</td></tr>
 <tr class="separator:ae5f1234db5258d233d8562b4fe001b43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2ef6d8482723df83468cd6582d394075" id="r_a2ef6d8482723df83468cd6582d394075"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a2ef6d8482723df83468cd6582d394075">zarrsDestroyArray</a> (<a class="el" href="zarrs_8h.html#a0d8c332996c42c863307e64a81f2109d">ZarrsArray</a> array)</td></tr>
 <tr class="separator:a2ef6d8482723df83468cd6582d394075"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a066669461c5ac95e7ea502e3813dca41" id="r_a066669461c5ac95e7ea502e3813dca41"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a066669461c5ac95e7ea502e3813dca41">zarrsDestroyGroup</a> (<a class="el" href="zarrs_8h.html#a4ac6b9c37b2a28b3960d442f26426cda">ZarrsGroup</a> group)</td></tr>
+<tr class="separator:a066669461c5ac95e7ea502e3813dca41"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac20cb33e41e742110d1c7b55bd8768a4" id="r_ac20cb33e41e742110d1c7b55bd8768a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#ac20cb33e41e742110d1c7b55bd8768a4">zarrsDestroyShardIndexCache</a> (<a class="el" href="zarrs_8h.html#ae509c4ce82d2c01d9365769562634126">ZarrsShardIndexCache</a> shardIndexCache)</td></tr>
 <tr class="separator:ac20cb33e41e742110d1c7b55bd8768a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a99505fccdc6117399b54925f8b77bd93" id="r_a99505fccdc6117399b54925f8b77bd93"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a99505fccdc6117399b54925f8b77bd93">zarrsDestroyStorage</a> (<a class="el" href="zarrs_8h.html#a2ad1df5ad00272f307ec86b1ada6de38">ZarrsStorage</a> storage)</td></tr>
 <tr class="separator:a99505fccdc6117399b54925f8b77bd93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5762993192e5d0ec36c3b29f356e05ae" id="r_a5762993192e5d0ec36c3b29f356e05ae"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a5762993192e5d0ec36c3b29f356e05ae">zarrsFreeString</a> (char *string)</td></tr>
 <tr class="separator:a5762993192e5d0ec36c3b29f356e05ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad80a3a359086a96273a51a8b8c1b28c7" id="r_ad80a3a359086a96273a51a8b8c1b28c7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#ad80a3a359086a96273a51a8b8c1b28c7">zarrsGroupGetAttributes</a> (<a class="el" href="zarrs_8h.html#a4ac6b9c37b2a28b3960d442f26426cda">ZarrsGroup</a> group, bool pretty, char **pAttributesString)</td></tr>
+<tr class="separator:ad80a3a359086a96273a51a8b8c1b28c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa36f727f5d223bb098c79ca06f94b985" id="r_aa36f727f5d223bb098c79ca06f94b985"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#aa36f727f5d223bb098c79ca06f94b985">zarrsGroupSetAttributes</a> (<a class="el" href="zarrs_8h.html#a4ac6b9c37b2a28b3960d442f26426cda">ZarrsGroup</a> group, const char *attributes)</td></tr>
+<tr class="separator:aa36f727f5d223bb098c79ca06f94b985"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad538b3e9a8b836cc0dd2e40466bf0c70" id="r_ad538b3e9a8b836cc0dd2e40466bf0c70"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#ad538b3e9a8b836cc0dd2e40466bf0c70">zarrsGroupStoreMetadata</a> (<a class="el" href="zarrs_8h.html#a4ac6b9c37b2a28b3960d442f26426cda">ZarrsGroup</a> group)</td></tr>
+<tr class="separator:ad538b3e9a8b836cc0dd2e40466bf0c70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6c9ea03b2c2440f0c44ac0010a83fe7c" id="r_a6c9ea03b2c2440f0c44ac0010a83fe7c"><td class="memItemLeft" align="right" valign="top">char *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a6c9ea03b2c2440f0c44ac0010a83fe7c">zarrsLastError</a> (void)</td></tr>
 <tr class="separator:a6c9ea03b2c2440f0c44ac0010a83fe7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a07fa6c2495c685e2b58977260e048387" id="r_a07fa6c2495c685e2b58977260e048387"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a07fa6c2495c685e2b58977260e048387">zarrsOpenArrayRW</a> (<a class="el" href="zarrs_8h.html#a2ad1df5ad00272f307ec86b1ada6de38">ZarrsStorage</a> storage, const char *path, <a class="el" href="zarrs_8h.html#a0d8c332996c42c863307e64a81f2109d">ZarrsArray</a> *pArray)</td></tr>
 <tr class="separator:a07fa6c2495c685e2b58977260e048387"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad024a8dadf9e781b5041c3e622f4af08" id="r_ad024a8dadf9e781b5041c3e622f4af08"><td class="memItemLeft" align="right" valign="top"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#ad024a8dadf9e781b5041c3e622f4af08">zarrsOpenGroupRW</a> (<a class="el" href="zarrs_8h.html#a2ad1df5ad00272f307ec86b1ada6de38">ZarrsStorage</a> storage, const char *path, <a class="el" href="zarrs_8h.html#a4ac6b9c37b2a28b3960d442f26426cda">ZarrsGroup</a> *pGroup)</td></tr>
+<tr class="separator:ad024a8dadf9e781b5041c3e622f4af08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad427b61281c3dee20edebe4e4410c7c3" id="r_ad427b61281c3dee20edebe4e4410c7c3"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#ad427b61281c3dee20edebe4e4410c7c3">zarrsVersion</a> (void)</td></tr>
 <tr class="separator:ad427b61281c3dee20edebe4e4410c7c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae02dd076406c33121a132fb4b61e4c8a" id="r_ae02dd076406c33121a132fb4b61e4c8a"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#ae02dd076406c33121a132fb4b61e4c8a">zarrsVersionMajor</a> (void)</td></tr>
@@ -306,7 +325,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>An opaque handle to a zarr array. </p>
 
-<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00083">83</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00086">86</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
 
 </div>
 </div>
@@ -322,7 +341,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00074">74</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00075">75</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
 
 </div>
 </div>
@@ -342,6 +361,39 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a4ac6b9c37b2a28b3960d442f26426cda" name="a4ac6b9c37b2a28b3960d442f26426cda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ac6b9c37b2a28b3960d442f26426cda">&#9670;&#160;</a></span>ZarrsGroup</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="zarrs_8h.html#a628ea1605a5cb5f20dac39d8ac661784">ZarrsGroup_T</a>* <a class="el" href="zarrs_8h.html#a4ac6b9c37b2a28b3960d442f26426cda">ZarrsGroup</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>An opaque handle to a zarr group. </p>
+
+<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00101">101</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
+
+</div>
+</div>
+<a id="a628ea1605a5cb5f20dac39d8ac661784" name="a628ea1605a5cb5f20dac39d8ac661784"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a628ea1605a5cb5f20dac39d8ac661784">&#9670;&#160;</a></span>ZarrsGroup_T</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="zarrs_8h.html#a628ea1605a5cb5f20dac39d8ac661784">ZarrsGroup_T</a> <a class="el" href="zarrs_8h.html#a628ea1605a5cb5f20dac39d8ac661784">ZarrsGroup_T</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00077">77</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
+
+</div>
+</div>
 <a id="a33440b28bddcad5e68aa86b3abddb3bb" name="a33440b28bddcad5e68aa86b3abddb3bb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a33440b28bddcad5e68aa86b3abddb3bb">&#9670;&#160;</a></span>ZarrsResult</h2>
 
@@ -354,7 +406,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00071">71</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00072">72</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
 
 </div>
 </div>
@@ -371,7 +423,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>An opaque handle to a zarrs [<code>ArrayShardedReadableExtCache</code>]. </p>
 
-<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00088">88</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00091">91</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
 
 </div>
 </div>
@@ -387,7 +439,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00076">76</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00079">79</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
 
 </div>
 </div>
@@ -404,7 +456,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>An opaque handle to a zarr store or storage transformer. </p>
 
-<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00093">93</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00096">96</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
 
 </div>
 </div>
@@ -420,7 +472,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00078">78</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00081">81</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
 
 </div>
 </div>
@@ -486,6 +538,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a05a3292fce4b0aa50a20f784f3cef3d5aec22658a78453362d718227eec5c13b0" name="a05a3292fce4b0aa50a20f784f3cef3d5aec22658a78453362d718227eec5c13b0"></a>ZARRS_ERROR_UNKNOWN_CHUNK_GRID_SHAPE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a05a3292fce4b0aa50a20f784f3cef3d5a160e034dab83d174bac8be870e7dd013" name="a05a3292fce4b0aa50a20f784f3cef3d5a160e034dab83d174bac8be870e7dd013"></a>ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a05a3292fce4b0aa50a20f784f3cef3d5af3c4e6147489571c36f76b92268ef9f8" name="a05a3292fce4b0aa50a20f784f3cef3d5af3c4e6147489571c36f76b92268ef9f8"></a>ZARRS_ERROR_UNSUPPORTED_DATA_TYPE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="a05a3292fce4b0aa50a20f784f3cef3d5ad785e83d75b9078d5c9e27b762e4882a" name="a05a3292fce4b0aa50a20f784f3cef3d5ad785e83d75b9078d5c9e27b762e4882a"></a>ZARRS_ERROR_GROUP&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 <p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00051">51</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
@@ -493,6 +546,45 @@ Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="a4130d1ef70418af1fed44af956d5626d" name="a4130d1ef70418af1fed44af956d5626d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4130d1ef70418af1fed44af956d5626d">&#9670;&#160;</a></span>zarrsArrayGetAttributes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a> zarrsArrayGetAttributes </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="zarrs_8h.html#a0d8c332996c42c863307e64a81f2109d">ZarrsArray</a>&#160;</td>
+          <td class="paramname"><em>array</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>pretty</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>pAttributesString</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the array attributes as a JSON string.</p>
+<p>The string must be freed with <code>zarrsFreeString</code>.</p>
+<h1><a class="anchor" id="autotoc_md0"></a>
+Safety</h1>
+<p><code>array</code> must be a valid <code>ZarrsArray</code> handle. </p>
+
+</div>
+</div>
 <a id="aec3f21673030c3b6be603192c02da235" name="aec3f21673030c3b6be603192c02da235"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aec3f21673030c3b6be603192c02da235">&#9670;&#160;</a></span>zarrsArrayGetAttributesString()</h2>
 
@@ -526,7 +618,7 @@ Functions</h2></td></tr>
 </div><div class="memdoc">
 <p>Get the array attributes as a JSON string.</p>
 <p>The string must be freed with <code>zarrsFreeString</code>.</p>
-<h1><a class="anchor" id="autotoc_md0"></a>
+<h1><a class="anchor" id="autotoc_md1"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. </p>
 
@@ -564,10 +656,10 @@ Safety</h1>
       </table>
 </div><div class="memdoc">
 <p>Return the number of chunks in the chunk grid.</p>
-<h1><a class="anchor" id="autotoc_md1"></a>
+<h1><a class="anchor" id="autotoc_md2"></a>
 Errors</h1>
 <p>Returns <code>ZarrsResult::ZARRS_ERROR_NULL_PTR</code> if <code>array</code> is a null pointer. Returns <code>ZarrsResult::ZARRS_ERROR_UNKNOWN_CHUNK_GRID_SHAPE</code> if the chunk grid shape cannot be determined.</p>
-<h1><a class="anchor" id="autotoc_md2"></a>
+<h1><a class="anchor" id="autotoc_md3"></a>
 Safety</h1>
 <p>If not null, <code>array</code> must be a valid <code>ZarrsArray</code> handle. <code>dimensionality</code> must match the dimensionality of the array and the length of the array pointed to by <code>pChunkGridShape</code>. </p>
 
@@ -612,7 +704,7 @@ Safety</h1>
 </div><div class="memdoc">
 <p>Get the origin of a chunk.</p>
 <p><code>pChunkIndices</code> is a pointer to an array of length <code>dimensionality</code> holding the chunk indices.</p>
-<h1><a class="anchor" id="autotoc_md3"></a>
+<h1><a class="anchor" id="autotoc_md4"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. <code>dimensionality</code> must match the dimensionality of the array and the length of the array pointed to by <code>pChunkIndices</code> and <code>pChunkOrigin</code>. </p>
 
@@ -657,7 +749,7 @@ Safety</h1>
 </div><div class="memdoc">
 <p>Get the shape of a chunk.</p>
 <p><code>pChunkIndices</code> is a pointer to an array of length <code>dimensionality</code> holding the chunk indices.</p>
-<h1><a class="anchor" id="autotoc_md4"></a>
+<h1><a class="anchor" id="autotoc_md5"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. <code>dimensionality</code> must match the dimensionality of the array and the length of the array pointed to by <code>pChunkIndices</code> and <code>pChunkShape</code>. </p>
 
@@ -713,10 +805,10 @@ Safety</h1>
       </table>
 </div><div class="memdoc">
 <p>Return the chunks indicating the chunks intersecting <code>array_subset</code>.</p>
-<h1><a class="anchor" id="autotoc_md6"></a>
+<h1><a class="anchor" id="autotoc_md7"></a>
 Errors</h1>
 <p>Returns <code>ZarrsResult::ZARRS_ERROR_NULL_PTR</code> if <code>array</code> is a null pointer. Returns <code>ZarrsResult::ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS</code> if the intersecting chunks cannot be determined.</p>
-<h1><a class="anchor" id="autotoc_md7"></a>
+<h1><a class="anchor" id="autotoc_md8"></a>
 Safety</h1>
 <p>If not null, <code>array</code> must be a valid <code>ZarrsArray</code> handle. <code>dimensionality</code> must match the dimensionality of the array and the length of the arrays pointed to by <code>pSubsetStart</code>, <code>pSubsetShape</code>, <code>pChunksStart</code>, and <code>pChunksShape</code>. </p>
 
@@ -761,7 +853,7 @@ Safety</h1>
 </div><div class="memdoc">
 <p>Get the size of a chunk in bytes.</p>
 <p><code>pChunkIndices</code> is a pointer to an array of length <code>dimensionality</code> holding the chunk indices.</p>
-<h1><a class="anchor" id="autotoc_md5"></a>
+<h1><a class="anchor" id="autotoc_md6"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. <code>dimensionality</code> must match the dimensionality of the array and the length of the array pointed to by <code>pChunkIndices</code>. </p>
 
@@ -793,10 +885,10 @@ Safety</h1>
       </table>
 </div><div class="memdoc">
 <p>Returns the data type of the array.</p>
-<h1><a class="anchor" id="autotoc_md8"></a>
+<h1><a class="anchor" id="autotoc_md9"></a>
 Errors</h1>
 <p>Returns <code>ZarrsResult::ZARRS_ERROR_NULL_PTR</code> if <code>array</code> is a null pointer.</p>
-<h1><a class="anchor" id="autotoc_md9"></a>
+<h1><a class="anchor" id="autotoc_md10"></a>
 Safety</h1>
 <p>If not null, <code>array</code> must be a valid <code>ZarrsArray</code> handle. </p>
 
@@ -828,10 +920,10 @@ Safety</h1>
       </table>
 </div><div class="memdoc">
 <p>Returns the dimensionality of the array.</p>
-<h1><a class="anchor" id="autotoc_md10"></a>
+<h1><a class="anchor" id="autotoc_md11"></a>
 Errors</h1>
 <p>Returns <code>ZarrsResult::ZARRS_ERROR_NULL_PTR</code> if <code>array</code> is a null pointer.</p>
-<h1><a class="anchor" id="autotoc_md11"></a>
+<h1><a class="anchor" id="autotoc_md12"></a>
 Safety</h1>
 <p>If not null, <code>array</code> must be a valid <code>ZarrsArray</code> handle. </p>
 
@@ -870,7 +962,7 @@ Safety</h1>
 </div><div class="memdoc">
 <p>Get the shape of the inner chunk grid of a sharded array.</p>
 <p>If the array is not sharded, the contents of <code>pInnerChunkGridShape</code> will equal the standard chunk grid shape.</p>
-<h1><a class="anchor" id="autotoc_md12"></a>
+<h1><a class="anchor" id="autotoc_md13"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. <code>dimensionality</code> must match the dimensionality of the array and the length of the array pointed to by <code>pInnerChunkGridShape</code>. </p>
 
@@ -915,7 +1007,7 @@ Safety</h1>
 </div><div class="memdoc">
 <p>Get the inner chunk shape for a sharded array.</p>
 <p><code>pIsSharded</code> is set to true if the array is sharded, otherwise false. If the array is not sharded, the contents of <code>pInnerChunkShape</code> will be undefined.</p>
-<h1><a class="anchor" id="autotoc_md13"></a>
+<h1><a class="anchor" id="autotoc_md14"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. <code>dimensionality</code> must match the dimensionality of the array and the length of the array pointed to by <code>pChunkShape</code>. </p>
 
@@ -954,7 +1046,7 @@ Safety</h1>
 </div><div class="memdoc">
 <p>Get the array metadata as a JSON string.</p>
 <p>The string must be freed with <code>zarrsFreeString</code>.</p>
-<h1><a class="anchor" id="autotoc_md14"></a>
+<h1><a class="anchor" id="autotoc_md15"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. </p>
 
@@ -992,10 +1084,10 @@ Safety</h1>
       </table>
 </div><div class="memdoc">
 <p>Returns the shape of the array.</p>
-<h1><a class="anchor" id="autotoc_md15"></a>
+<h1><a class="anchor" id="autotoc_md16"></a>
 Errors</h1>
 <p>Returns <code>ZarrsResult::ZARRS_ERROR_NULL_PTR</code> if <code>array</code> is a null pointer.</p>
-<h1><a class="anchor" id="autotoc_md16"></a>
+<h1><a class="anchor" id="autotoc_md17"></a>
 Safety</h1>
 <p>If not null, <code>array</code> must be a valid <code>ZarrsArray</code> handle. <code>dimensionality</code> must match the dimensionality of the array and the length of the array pointed to by <code>pShape</code>. </p>
 
@@ -1040,7 +1132,7 @@ Safety</h1>
 </div><div class="memdoc">
 <p>Get the size of a subset in bytes.</p>
 <p><code>pSubsetShape</code> is a pointer to an array of length <code>dimensionality</code> holding the shape of the subset.</p>
-<h1><a class="anchor" id="autotoc_md17"></a>
+<h1><a class="anchor" id="autotoc_md18"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. <code>dimensionality</code> must match the dimensionality of the array and the length of the array pointed to by <code>pSubsetShape</code>. </p>
 
@@ -1091,10 +1183,10 @@ Safety</h1>
 </div><div class="memdoc">
 <p>Retrieve a chunk from an array.</p>
 <p><code>pChunkIndices</code> is a pointer to an array of length <code>dimensionality</code> holding the chunk indices. <code>pChunkBytes</code> is a pointer to an array of bytes of length <code>chunkBytesCount</code> that must match the expected size of the chunk as returned by <code><a class="el" href="zarrs_8h.html#abea4d63eba3ddbbdc580423d465fa9ca">zarrsArrayGetChunkSize()</a></code>.</p>
-<h1><a class="anchor" id="autotoc_md18"></a>
+<h1><a class="anchor" id="autotoc_md19"></a>
 Errors</h1>
 <p>Returns an error if the array does not have read capability.</p>
-<h1><a class="anchor" id="autotoc_md19"></a>
+<h1><a class="anchor" id="autotoc_md20"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. <code>dimensionality</code> must match the dimensionality of the array and the length of the array pointed to by <code>pChunkIndices</code>. </p>
 
@@ -1151,10 +1243,10 @@ Safety</h1>
 </div><div class="memdoc">
 <p>Retrieve an inner chunk from a sharded array (or outer chunk for an unsharded array).</p>
 <p><code>pChunkIndices</code> is a pointer to an array of length <code>dimensionality</code> holding the chunk indices. <code>pChunkBytes</code> is a pointer to an array of bytes of length <code>chunkBytesCount</code> that must match the expected size of the chunk as returned by <code><a class="el" href="zarrs_8h.html#abea4d63eba3ddbbdc580423d465fa9ca">zarrsArrayGetChunkSize()</a></code>.</p>
-<h1><a class="anchor" id="autotoc_md20"></a>
+<h1><a class="anchor" id="autotoc_md21"></a>
 Errors</h1>
 <p>Returns an error if the array does not have read capability.</p>
-<h1><a class="anchor" id="autotoc_md21"></a>
+<h1><a class="anchor" id="autotoc_md22"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. <code>dimensionality</code> must match the dimensionality of the array and the length of the array pointed to by <code>pChunkIndices</code>. </p>
 
@@ -1211,10 +1303,10 @@ Safety</h1>
 </div><div class="memdoc">
 <p>Retrieve a subset from an array.</p>
 <p><code>pSubsetStart</code> and <code>pSubsetShape</code> are pointers to arrays of length <code>dimensionality</code> holding the chunk start and shape respectively. <code>pSubsetBytes</code> is a pointer to an array of bytes of length <code>subsetBytesCount</code> that must match the expected size of the subset as returned by <code><a class="el" href="zarrs_8h.html#ab6b810426071bce9232e58f49de6710f">zarrsArrayGetSubsetSize()</a></code>.</p>
-<h1><a class="anchor" id="autotoc_md22"></a>
+<h1><a class="anchor" id="autotoc_md23"></a>
 Errors</h1>
 <p>Returns an error if the array does not have read capability.</p>
-<h1><a class="anchor" id="autotoc_md23"></a>
+<h1><a class="anchor" id="autotoc_md24"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. <code>dimensionality</code> must match the dimensionality of the array and the length of the arrays pointed to by <code>pSubsetStart</code> and <code>pSubsetShape</code>. </p>
 
@@ -1277,10 +1369,10 @@ Safety</h1>
 </div><div class="memdoc">
 <p>Retrieve a subset from an array (with a shard index cache).</p>
 <p><code>pSubsetStart</code> and <code>pSubsetShape</code> are pointers to arrays of length <code>dimensionality</code> holding the chunk start and shape respectively. <code>pSubsetBytes</code> is a pointer to an array of bytes of length <code>subsetBytesCount</code> that must match the expected size of the subset as returned by <code><a class="el" href="zarrs_8h.html#ab6b810426071bce9232e58f49de6710f">zarrsArrayGetSubsetSize()</a></code>.</p>
-<h1><a class="anchor" id="autotoc_md24"></a>
+<h1><a class="anchor" id="autotoc_md25"></a>
 Errors</h1>
 <p>Returns an error if the array does not have read capability.</p>
-<h1><a class="anchor" id="autotoc_md25"></a>
+<h1><a class="anchor" id="autotoc_md26"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. <code>dimensionality</code> must match the dimensionality of the array and the length of the arrays pointed to by <code>pSubsetStart</code> and <code>pSubsetShape</code>. </p>
 
@@ -1312,10 +1404,10 @@ Safety</h1>
       </table>
 </div><div class="memdoc">
 <p>Set the array attributes from a JSON string.</p>
-<h1><a class="anchor" id="autotoc_md26"></a>
+<h1><a class="anchor" id="autotoc_md27"></a>
 Errors</h1>
 <p>Returns <code>ZarrsResult::ZARRS_ERROR_INVALID_METADATA</code> if attributes is not a valid JSON object (map).</p>
-<h1><a class="anchor" id="autotoc_md27"></a>
+<h1><a class="anchor" id="autotoc_md28"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. </p>
 
@@ -1366,10 +1458,10 @@ Safety</h1>
 </div><div class="memdoc">
 <p>Store a chunk.</p>
 <p><code>pChunkIndices</code> is a pointer to an array of length <code>dimensionality</code> holding the chunk indices. <code>pChunkBytes</code> is a pointer to an array of bytes of length <code>chunkBytesCount</code> that must match the expected size of the chunk as returned by <code><a class="el" href="zarrs_8h.html#abea4d63eba3ddbbdc580423d465fa9ca">zarrsArrayGetChunkSize()</a></code>.</p>
-<h1><a class="anchor" id="autotoc_md28"></a>
+<h1><a class="anchor" id="autotoc_md29"></a>
 Errors</h1>
 <p>Returns an error if the array does not have write capability.</p>
-<h1><a class="anchor" id="autotoc_md29"></a>
+<h1><a class="anchor" id="autotoc_md30"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. <code>dimensionality</code> must match the dimensionality of the array and the length of the array pointed to by <code>pChunkIndices</code>. </p>
 
@@ -1391,10 +1483,10 @@ Safety</h1>
       </table>
 </div><div class="memdoc">
 <p>Store array metadata.</p>
-<h1><a class="anchor" id="autotoc_md30"></a>
+<h1><a class="anchor" id="autotoc_md31"></a>
 Errors</h1>
 <p>Returns an error if the array does not have write capability.</p>
-<h1><a class="anchor" id="autotoc_md31"></a>
+<h1><a class="anchor" id="autotoc_md32"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. </p>
 
@@ -1451,10 +1543,10 @@ Safety</h1>
 </div><div class="memdoc">
 <p>Store an array subset.</p>
 <p><code>pSubsetStart</code> and <code>pSubsetShape</code> are pointers to arrays of length <code>dimensionality</code> holding the chunk start and shape respectively. <code>pSubsetBytes</code> is a pointer to an array of bytes of length <code>subsetBytesCount</code> that must match the expected size of the subset as returned by <code><a class="el" href="zarrs_8h.html#ab6b810426071bce9232e58f49de6710f">zarrsArrayGetSubsetSize()</a></code>.</p>
-<h1><a class="anchor" id="autotoc_md32"></a>
+<h1><a class="anchor" id="autotoc_md33"></a>
 Errors</h1>
 <p>Returns an error if the array does not have read/write capability.</p>
-<h1><a class="anchor" id="autotoc_md33"></a>
+<h1><a class="anchor" id="autotoc_md34"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. <code>dimensionality</code> must match the dimensionality of the array and the length of the arrays pointed to by <code>pSubsetStart</code> and <code>pSubsetShape</code>. </p>
 
@@ -1499,9 +1591,54 @@ Safety</h1>
 </div><div class="memdoc">
 <p>Create a handle to a new array (read/write capability).</p>
 <p><code>metadata</code> is expected to be a JSON string representing a zarr V3 array <code>zarr.json</code>. <code>pArray</code> is a pointer to a handle in which the created <code>ZarrsArray</code> is returned.</p>
-<h1><a class="anchor" id="autotoc_md34"></a>
+<h1><a class="anchor" id="autotoc_md35"></a>
 Safety</h1>
 <p><code>pArray</code> must be a valid pointer to a <code>ZarrsArray</code> handle. </p>
+
+</div>
+</div>
+<a id="a6db6aa2610891f4ceaea937b52b4ffd0" name="a6db6aa2610891f4ceaea937b52b4ffd0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6db6aa2610891f4ceaea937b52b4ffd0">&#9670;&#160;</a></span>zarrsCreateGroupRW()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a> zarrsCreateGroupRW </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="zarrs_8h.html#a2ad1df5ad00272f307ec86b1ada6de38">ZarrsStorage</a>&#160;</td>
+          <td class="paramname"><em>storage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>metadata</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="zarrs_8h.html#a4ac6b9c37b2a28b3960d442f26426cda">ZarrsGroup</a> *&#160;</td>
+          <td class="paramname"><em>pGroup</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Create a handle to a new group (read/write capability).</p>
+<p><code>metadata</code> is expected to be a JSON string representing a zarr V3 group <code>zarr.json</code>. <code>pGroup</code> is a pointer to a handle in which the created <code>ZarrsGroup</code> is returned.</p>
+<h1><a class="anchor" id="autotoc_md36"></a>
+Safety</h1>
+<p><code>pGroup</code> must be a valid pointer to a <code>ZarrsGroup</code> handle. </p>
 
 </div>
 </div>
@@ -1531,10 +1668,10 @@ Safety</h1>
       </table>
 </div><div class="memdoc">
 <p>Create a handle to a new shard index cache.</p>
-<h1><a class="anchor" id="autotoc_md35"></a>
+<h1><a class="anchor" id="autotoc_md37"></a>
 Errors</h1>
 <p>Returns an error if the array does not have read capability.</p>
-<h1><a class="anchor" id="autotoc_md36"></a>
+<h1><a class="anchor" id="autotoc_md38"></a>
 Safety</h1>
 <p><code>array</code> must be a valid <code>ZarrsArray</code> handle. </p>
 
@@ -1567,7 +1704,7 @@ Safety</h1>
 </div><div class="memdoc">
 <p>Create a storage handle to a filesystem store.</p>
 <p><code>pStorage</code> is a pointer to a handle in which the created <code>ZarrsStorage</code> is returned.</p>
-<h1><a class="anchor" id="autotoc_md37"></a>
+<h1><a class="anchor" id="autotoc_md39"></a>
 Safety</h1>
 <p><code>pStorage</code> must be a valid pointer to a <code>ZarrsStorage</code> handle. </p>
 
@@ -1589,12 +1726,37 @@ Safety</h1>
       </table>
 </div><div class="memdoc">
 <p>Destroy array.</p>
-<h1><a class="anchor" id="autotoc_md38"></a>
+<h1><a class="anchor" id="autotoc_md40"></a>
 Errors</h1>
 <p>Returns <code>ZarrsResult::ZARRS_ERROR_NULL_PTR</code> if <code>array</code> is a null pointer.</p>
-<h1><a class="anchor" id="autotoc_md39"></a>
+<h1><a class="anchor" id="autotoc_md41"></a>
 Safety</h1>
 <p>If not null, <code>array</code> must be a valid <code>ZarrsArray</code> handle. </p>
+
+</div>
+</div>
+<a id="a066669461c5ac95e7ea502e3813dca41" name="a066669461c5ac95e7ea502e3813dca41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a066669461c5ac95e7ea502e3813dca41">&#9670;&#160;</a></span>zarrsDestroyGroup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a> zarrsDestroyGroup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="zarrs_8h.html#a4ac6b9c37b2a28b3960d442f26426cda">ZarrsGroup</a>&#160;</td>
+          <td class="paramname"><em>group</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Destroy group.</p>
+<h1><a class="anchor" id="autotoc_md42"></a>
+Errors</h1>
+<p>Returns <code>ZarrsResult::ZARRS_ERROR_NULL_PTR</code> if <code>group</code> is a null pointer.</p>
+<h1><a class="anchor" id="autotoc_md43"></a>
+Safety</h1>
+<p>If not null, <code>group</code> must be a valid <code>ZarrsGroup</code> handle. </p>
 
 </div>
 </div>
@@ -1614,10 +1776,10 @@ Safety</h1>
       </table>
 </div><div class="memdoc">
 <p>Destroy a shard index cache.</p>
-<h1><a class="anchor" id="autotoc_md40"></a>
+<h1><a class="anchor" id="autotoc_md44"></a>
 Errors</h1>
 <p>Returns <code>ZarrsResult::ZARRS_ERROR_NULL_PTR</code> if <code>shardIndexCache</code> is a null pointer.</p>
-<h1><a class="anchor" id="autotoc_md41"></a>
+<h1><a class="anchor" id="autotoc_md45"></a>
 Safety</h1>
 <p>If not null, <code>shardIndexCache</code> must be a valid <code>ZarrsShardIndexCache</code> handle. </p>
 
@@ -1639,10 +1801,10 @@ Safety</h1>
       </table>
 </div><div class="memdoc">
 <p>Destroy storage.</p>
-<h1><a class="anchor" id="autotoc_md42"></a>
+<h1><a class="anchor" id="autotoc_md46"></a>
 Errors</h1>
 <p>Returns <code>ZarrsResult::ZARRS_ERROR_NULL_PTR</code> if <code>storage</code> is a null pointer.</p>
-<h1><a class="anchor" id="autotoc_md43"></a>
+<h1><a class="anchor" id="autotoc_md47"></a>
 Safety</h1>
 <p>If not null, <code>storage</code> must be a valid storage device created with a <code>zarrsStorage</code> function. </p>
 
@@ -1664,9 +1826,108 @@ Safety</h1>
       </table>
 </div><div class="memdoc">
 <p>Free a string created by zarrs.</p>
-<h1><a class="anchor" id="autotoc_md44"></a>
+<h1><a class="anchor" id="autotoc_md48"></a>
 Safety</h1>
 <p><code>array</code> must be a valid string created by zarrs. </p>
+
+</div>
+</div>
+<a id="ad80a3a359086a96273a51a8b8c1b28c7" name="ad80a3a359086a96273a51a8b8c1b28c7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad80a3a359086a96273a51a8b8c1b28c7">&#9670;&#160;</a></span>zarrsGroupGetAttributes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a> zarrsGroupGetAttributes </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="zarrs_8h.html#a4ac6b9c37b2a28b3960d442f26426cda">ZarrsGroup</a>&#160;</td>
+          <td class="paramname"><em>group</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>pretty</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>pAttributesString</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Get the group attributes as a JSON string.</p>
+<p>The string must be freed with <code>zarrsFreeString</code>.</p>
+<h1><a class="anchor" id="autotoc_md49"></a>
+Safety</h1>
+<p><code>group</code> must be a valid <code>ZarrsGroup</code> handle. </p>
+
+</div>
+</div>
+<a id="aa36f727f5d223bb098c79ca06f94b985" name="aa36f727f5d223bb098c79ca06f94b985"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa36f727f5d223bb098c79ca06f94b985">&#9670;&#160;</a></span>zarrsGroupSetAttributes()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a> zarrsGroupSetAttributes </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="zarrs_8h.html#a4ac6b9c37b2a28b3960d442f26426cda">ZarrsGroup</a>&#160;</td>
+          <td class="paramname"><em>group</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>attributes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Set the group attributes from a JSON string.</p>
+<h1><a class="anchor" id="autotoc_md50"></a>
+Errors</h1>
+<p>Returns <code>ZarrsResult::ZARRS_ERROR_INVALID_METADATA</code> if attributes is not a valid JSON object (map).</p>
+<h1><a class="anchor" id="autotoc_md51"></a>
+Safety</h1>
+<p><code>group</code> must be a valid <code>ZarrsGroup</code> handle. </p>
+
+</div>
+</div>
+<a id="ad538b3e9a8b836cc0dd2e40466bf0c70" name="ad538b3e9a8b836cc0dd2e40466bf0c70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad538b3e9a8b836cc0dd2e40466bf0c70">&#9670;&#160;</a></span>zarrsGroupStoreMetadata()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a> zarrsGroupStoreMetadata </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="zarrs_8h.html#a4ac6b9c37b2a28b3960d442f26426cda">ZarrsGroup</a>&#160;</td>
+          <td class="paramname"><em>group</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Store group metadata.</p>
+<h1><a class="anchor" id="autotoc_md52"></a>
+Errors</h1>
+<p>Returns an error if the group does not have write capability.</p>
+<h1><a class="anchor" id="autotoc_md53"></a>
+Safety</h1>
+<p><code>group</code> must be a valid <code>ZarrsGroup</code> handle. </p>
 
 </div>
 </div>
@@ -1723,9 +1984,48 @@ Safety</h1>
 </div><div class="memdoc">
 <p>Create a handle to an existing array (read/write capability).</p>
 <p><code>pArray</code> is a pointer to a handle in which the created <code>ZarrsArray</code> is returned.</p>
-<h1><a class="anchor" id="autotoc_md45"></a>
+<h1><a class="anchor" id="autotoc_md54"></a>
 Safety</h1>
 <p><code>pArray</code> must be a valid pointer to a <code>ZarrsArray</code> handle. </p>
+
+</div>
+</div>
+<a id="ad024a8dadf9e781b5041c3e622f4af08" name="ad024a8dadf9e781b5041c3e622f4af08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad024a8dadf9e781b5041c3e622f4af08">&#9670;&#160;</a></span>zarrsOpenGroupRW()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a> zarrsOpenGroupRW </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="zarrs_8h.html#a2ad1df5ad00272f307ec86b1ada6de38">ZarrsStorage</a>&#160;</td>
+          <td class="paramname"><em>storage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="zarrs_8h.html#a4ac6b9c37b2a28b3960d442f26426cda">ZarrsGroup</a> *&#160;</td>
+          <td class="paramname"><em>pGroup</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Create a handle to an existing group (read/write capability).</p>
+<p><code>pGroup</code> is a pointer to a handle in which the created <code>ZarrsGroup</code> is returned.</p>
+<h1><a class="anchor" id="autotoc_md55"></a>
+Safety</h1>
+<p><code>pGroup</code> must be a valid pointer to a <code>ZarrsGroup</code> handle. </p>
 
 </div>
 </div>

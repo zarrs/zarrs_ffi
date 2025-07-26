@@ -99,7 +99,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <p><code>zarrs_ffi</code> is a single header library: <code><a class="el" href="zarrs_8h.html">zarrs.h</a></code> <a href="https://zarrs.dev/zarrs_ffi/zarrs_8h.html">(docs)</a>.</p>
 <p>Currently <code>zarrs_ffi</code> only supports a small subset of the <a href="https://github.com/LDeakin/zarrs"><code>zarrs</code></a> API.</p>
 <p>A changelog can be found <a href="https://github.com/LDeakin/zarrs_ffi/blob/main/CHANGELOG.md">here</a>.</p>
-<h1><a class="anchor" id="autotoc_md47"></a>
+<h1><a class="anchor" id="autotoc_md57"></a>
 Example</h1>
 <div class="fragment"><div class="line"> ++</div>
 <div class="line"><span class="preprocessor">#include &quot;<a class="code" href="zarrs_8h.html">zarrs.h</a>&quot;</span></div>
@@ -111,7 +111,7 @@ Example</h1>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Open an array in the hierarchy</span></div>
 <div class="line">  <a class="code hl_typedef" href="zarrs_8h.html#a0d8c332996c42c863307e64a81f2109d">ZarrsArray</a> array = <span class="keyword">nullptr</span>;</div>
-<div class="line">  <a class="code hl_function" href="zarrs_8h.html#a07fa6c2495c685e2b58977260e048387">zarrsOpenArrayRW</a>(storage, <span class="stringliteral">&quot;/array&quot;</span>, metadata, &amp;array);</div>
+<div class="line">  <a class="code hl_define" href="zarrs_8h.html#ac6827e2da61e1b54d1b90dfb8aac0d80">zarrs_assert</a>(<a class="code hl_function" href="zarrs_8h.html#a07fa6c2495c685e2b58977260e048387">zarrsOpenArrayRW</a>(storage, <span class="stringliteral">&quot;/array&quot;</span>, &amp;array));</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Get the array dimensionality</span></div>
 <div class="line">  <span class="keywordtype">size_t</span> dimensionality;</div>
@@ -127,19 +127,19 @@ Example</h1>
 <div class="line">}</div>
 <div class="ttc" id="azarrs_8h_html"><div class="ttname"><a href="zarrs_8h.html">zarrs.h</a></div></div>
 <div class="ttc" id="azarrs_8h_html_a07fa6c2495c685e2b58977260e048387"><div class="ttname"><a href="zarrs_8h.html#a07fa6c2495c685e2b58977260e048387">zarrsOpenArrayRW</a></div><div class="ttdeci">ZarrsResult zarrsOpenArrayRW(ZarrsStorage storage, const char *path, ZarrsArray *pArray)</div></div>
-<div class="ttc" id="azarrs_8h_html_a0d8c332996c42c863307e64a81f2109d"><div class="ttname"><a href="zarrs_8h.html#a0d8c332996c42c863307e64a81f2109d">ZarrsArray</a></div><div class="ttdeci">struct ZarrsArray_T * ZarrsArray</div><div class="ttdef"><b>Definition</b> <a href="zarrs_8h_source.html#l00083">zarrs.h:83</a></div></div>
-<div class="ttc" id="azarrs_8h_html_a2ad1df5ad00272f307ec86b1ada6de38"><div class="ttname"><a href="zarrs_8h.html#a2ad1df5ad00272f307ec86b1ada6de38">ZarrsStorage</a></div><div class="ttdeci">struct ZarrsStorage_T * ZarrsStorage</div><div class="ttdef"><b>Definition</b> <a href="zarrs_8h_source.html#l00093">zarrs.h:93</a></div></div>
+<div class="ttc" id="azarrs_8h_html_a0d8c332996c42c863307e64a81f2109d"><div class="ttname"><a href="zarrs_8h.html#a0d8c332996c42c863307e64a81f2109d">ZarrsArray</a></div><div class="ttdeci">struct ZarrsArray_T * ZarrsArray</div><div class="ttdef"><b>Definition</b> <a href="zarrs_8h_source.html#l00086">zarrs.h:86</a></div></div>
+<div class="ttc" id="azarrs_8h_html_a2ad1df5ad00272f307ec86b1ada6de38"><div class="ttname"><a href="zarrs_8h.html#a2ad1df5ad00272f307ec86b1ada6de38">ZarrsStorage</a></div><div class="ttdeci">struct ZarrsStorage_T * ZarrsStorage</div><div class="ttdef"><b>Definition</b> <a href="zarrs_8h_source.html#l00096">zarrs.h:96</a></div></div>
 <div class="ttc" id="azarrs_8h_html_a641c12da4e8dd2b52d6f3781b927319f"><div class="ttname"><a href="zarrs_8h.html#a641c12da4e8dd2b52d6f3781b927319f">zarrsArrayRetrieveChunk</a></div><div class="ttdeci">ZarrsResult zarrsArrayRetrieveChunk(ZarrsArray array, size_t dimensionality, const uint64_t *pChunkIndices, size_t chunkBytesCount, uint8_t *pChunkBytes)</div></div>
 <div class="ttc" id="azarrs_8h_html_a824f539982ed3cf2b22edf4f1496a794"><div class="ttname"><a href="zarrs_8h.html#a824f539982ed3cf2b22edf4f1496a794">zarrsArrayGetDimensionality</a></div><div class="ttdeci">ZarrsResult zarrsArrayGetDimensionality(ZarrsArray array, size_t *dimensionality)</div></div>
 <div class="ttc" id="azarrs_8h_html_abea4d63eba3ddbbdc580423d465fa9ca"><div class="ttname"><a href="zarrs_8h.html#abea4d63eba3ddbbdc580423d465fa9ca">zarrsArrayGetChunkSize</a></div><div class="ttdeci">ZarrsResult zarrsArrayGetChunkSize(ZarrsArray array, size_t dimensionality, const uint64_t *pChunkIndices, size_t *chunkSize)</div></div>
 <div class="ttc" id="azarrs_8h_html_ac6827e2da61e1b54d1b90dfb8aac0d80"><div class="ttname"><a href="zarrs_8h.html#ac6827e2da61e1b54d1b90dfb8aac0d80">zarrs_assert</a></div><div class="ttdeci">#define zarrs_assert(expr)</div><div class="ttdef"><b>Definition</b> <a href="zarrs_8h_source.html#l00018">zarrs.h:18</a></div></div>
 <div class="ttc" id="azarrs_8h_html_ae5f1234db5258d233d8562b4fe001b43"><div class="ttname"><a href="zarrs_8h.html#ae5f1234db5258d233d8562b4fe001b43">zarrsCreateStorageFilesystem</a></div><div class="ttdeci">ZarrsResult zarrsCreateStorageFilesystem(const char *path, ZarrsStorage *pStorage)</div></div>
 </div><!-- fragment --><p>See a more comprehensive example in the <a href="https://github.com/LDeakin/zarrs_ffi/tree/main/examples">examples</a> directory.</p>
-<h1><a class="anchor" id="autotoc_md48"></a>
+<h1><a class="anchor" id="autotoc_md58"></a>
 CMake Quickstart</h1>
 <ol type="1">
 <li>Install the Rust compiler (and cargo).</li>
-<li>Put <a href="https://github.com/LDeakin/zarrs_ffi/blob/main/examples/cmake_project/Findzarrs.cmake">Findzarrs.cmake</a> in your <code>CMAKE_MODULE_PATH</code></li>
+<li>Put <a href="https://github.com/LDeakin/zarrs_ffi/blob/main/examples/Findzarrs.cmake">Findzarrs.cmake</a> in your <code>CMAKE_MODULE_PATH</code></li>
 <li><code>find_package(zarrs &lt;version&gt; REQUIRED COMPONENTS zarrs/bz2)</code><ul>
 <li>Replace <code>&lt;version&gt;</code> with the latest release: <a href="https://crates.io/crates/zarrs_ffi"><img src="https://img.shields.io/crates/v/zarrs_ffi.svg" alt="Latest Version" style="pointer-events: none;" class="inline"/></a> (e.g., <code>0.9</code> or <code>0.9.2</code>)</li>
 <li><a href="https://github.com/LDeakin/zarrs"><code>zarrs</code></a> is retrieved from <code>GitHub</code> using <a href="https://cmake.org/cmake/help/latest/module/FetchContent.html">FetchContent</a> and built using <a href="https://github.com/corrosion-rs/corrosion">corrosion</a></li>
@@ -148,23 +148,23 @@ CMake Quickstart</h1>
 </li>
 <li>the <code>zarrs_ffi</code> library is available as the <code>zarrs::zarrs</code> or <code>zarrs::zarrs-static</code> target</li>
 </ol>
-<p>A complete <code>CMake</code> example can be found in <a href="https://github.com/LDeakin/zarrs_ffi/tree/main/examples/cmake_project">examples/cmake_project</a>.</p>
-<h1><a class="anchor" id="autotoc_md49"></a>
+<p>A complete <code>CMake</code> example can be found in <a href="https://github.com/LDeakin/zarrs_ffi/tree/main/examples/">examples/</a>.</p>
+<h1><a class="anchor" id="autotoc_md59"></a>
 Manual Build</h1>
-<h3><a class="anchor" id="autotoc_md50"></a>
+<h3><a class="anchor" id="autotoc_md60"></a>
 Basic Build</h3>
 <p>Building generates a header, and a platform-dependent static and dynamic library. </p><div class="fragment"><div class="line">cargo build --release --features cbindgen # -&gt; zarrs.h and target/release/[lib]zarrs_ffi{.a,.so,.dll,.dylib}</div>
 </div><!-- fragment --><p> <code><a class="el" href="zarrs_8h.html">zarrs.h</a></code> is only re-generated if the <code>cbindgen</code> feature is enabled.</p>
-<h3><a class="anchor" id="autotoc_md51"></a>
+<h3><a class="anchor" id="autotoc_md61"></a>
 Enabling SIMD intrinsics</h3>
 <p>Encoding and decoding performance may be improved with <code>avx2</code>/<code>sse2</code> enabled (if supported). Compile with either of:</p><ul>
 <li><code>RUSTFLAGS="-C target-cpu=native"</code></li>
 <li><code>RUSTFLAGS="-C target-feature=+avx2,+sse2"</code></li>
 </ul>
-<h3><a class="anchor" id="autotoc_md52"></a>
+<h3><a class="anchor" id="autotoc_md62"></a>
 Enabling non-default zarrs codecs</h3>
 <p>Non-default <code>zarrs</code> codecs (see <a href="https://docs.rs/zarrs/latest/zarrs/#crate-features"><code>zarrs</code> crate features</a>) can be enabled with the <code>all_codecs</code> feature. Alternatively, individual codecs can be enabled by passing them as feature flags. For example: </p><div class="fragment"><div class="line">cargo build --release --features cbindgen --features zarrs/zstd,zarrs/bitround,zarrs/zfp,zarrs/bz2,zarrs/pcodec,zarrs/gdeflate</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md53"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md63"></a>
 Licence</h1>
 <p><code>zarrs_ffi</code> is licensed under either of</p><ul>
 <li>the Apache License, Version 2.0 <a href="./LICENCE-APACHE">LICENSE-APACHE</a> or <a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a> or</li>
