@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add trusted publishing
+
 ### Changed
 - Bump `zarrs` to 0.21.2
 - Move `cmake` example up from `./examples/cmake_project` into `./examples`
