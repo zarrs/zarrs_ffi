@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Add trusted publishing
+- Add Zarr group functionality
+  - `ZarrsGroup`
+  - `zarrs{Create,Open,Destroy}GroupRW()`
+  - `zarrsGroupStoreMetadata()`
+  - `zarrsGroup{Get,Set}Attributes()`
+  - 
 
 ### Changed
 - Bump `zarrs` to 0.21.2

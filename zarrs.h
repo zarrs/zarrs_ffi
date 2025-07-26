@@ -66,12 +66,15 @@ enum ZarrsResult
   ZARRS_ERROR_UNKNOWN_CHUNK_GRID_SHAPE = -10,
   ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS = -11,
   ZARRS_ERROR_UNSUPPORTED_DATA_TYPE = -12,
+  ZARRS_ERROR_GROUP = -13,
 };
 #ifndef __cplusplus
 typedef int32_t ZarrsResult;
 #endif // __cplusplus
 
 typedef struct ZarrsArray_T ZarrsArray_T;
+
+typedef struct ZarrsGroup_T ZarrsGroup_T;
 
 typedef struct ZarrsShardIndexCache_T ZarrsShardIndexCache_T;
 
@@ -91,6 +94,11 @@ typedef struct ZarrsShardIndexCache_T *ZarrsShardIndexCache;
  * An opaque handle to a zarr store or storage transformer.
  */
 typedef struct ZarrsStorage_T *ZarrsStorage;
+
+/**
+ * An opaque handle to a zarr group.
+ */
+typedef struct ZarrsGroup_T *ZarrsGroup;
 
 #ifdef __cplusplus
 extern "C" {
@@ -426,6 +434,20 @@ ZarrsResult zarrsCreateArrayRW(ZarrsStorage storage,
                                ZarrsArray *pArray);
 
 /**
+ * Create a handle to a new group (read/write capability).
+ *
+ * `metadata` is expected to be a JSON string representing a zarr V3 group `zarr.json`.
+ * `pGroup` is a pointer to a handle in which the created `ZarrsGroup` is returned.
+ *
+ * # Safety
+ * `pGroup` must be a valid pointer to a `ZarrsGroup` handle.
+ */
+ZarrsResult zarrsCreateGroupRW(ZarrsStorage storage,
+                               const char* path,
+                               const char* metadata,
+                               ZarrsGroup *pGroup);
+
+/**
  * Create a handle to a new shard index cache.
  *
  * # Errors
@@ -458,6 +480,17 @@ ZarrsResult zarrsCreateStorageFilesystem(const char* path, ZarrsStorage *pStorag
 ZarrsResult zarrsDestroyArray(ZarrsArray array);
 
 /**
+ * Destroy group.
+ *
+ * # Errors
+ * Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `group` is a null pointer.
+ *
+ * # Safety
+ * If not null, `group` must be a valid `ZarrsGroup` handle.
+ */
+ZarrsResult zarrsDestroyGroup(ZarrsGroup group);
+
+/**
  * Destroy a shard index cache.
  *
  * # Errors
@@ -488,6 +521,39 @@ ZarrsResult zarrsDestroyStorage(ZarrsStorage storage);
 ZarrsResult zarrsFreeString(char *string);
 
 /**
+ * Get the group attributes as a JSON string.
+ *
+ * The string must be freed with `zarrsFreeString`.
+ *
+ * # Safety
+ * `group` must be a valid `ZarrsGroup` handle.
+ */
+ZarrsResult zarrsGroupGetAttributes(ZarrsGroup group, bool pretty, char **pAttributesString);
+
+/**
+ * Set the group attributes from a JSON string.
+ *
+ * # Errors
+ * Returns `ZarrsResult::ZARRS_ERROR_INVALID_METADATA` if attributes is not a valid JSON object (map).
+ *
+ * # Safety
+ * `group` must be a valid `ZarrsGroup` handle.
+ */
+ZarrsResult zarrsGroupSetAttributes(ZarrsGroup group,
+                                    const char* attributes);
+
+/**
+ * Store group metadata.
+ *
+ * # Errors
+ * Returns an error if the group does not have write capability.
+ *
+ * # Safety
+ * `group` must be a valid `ZarrsGroup` handle.
+ */
+ZarrsResult zarrsGroupStoreMetadata(ZarrsGroup group);
+
+/**
  * Get the last error string.
  *
  * The string must be freed with `zarrsFreeString`.
@@ -503,6 +569,16 @@ char *zarrsLastError(void);
  * `pArray` must be a valid pointer to a `ZarrsArray` handle.
  */
 ZarrsResult zarrsOpenArrayRW(ZarrsStorage storage, const char* path, ZarrsArray *pArray);
+
+/**
+ * Create a handle to an existing group (read/write capability).
+ *
+ * `pGroup` is a pointer to a handle in which the created `ZarrsGroup` is returned.
+ *
+ * # Safety
+ * `pGroup` must be a valid pointer to a `ZarrsGroup` handle.
+ */
+ZarrsResult zarrsOpenGroupRW(ZarrsStorage storage, const char* path, ZarrsGroup *pGroup);
 
 /**
  * Get the zarrs version.

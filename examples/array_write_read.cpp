@@ -8,7 +8,14 @@
 #include <string>
 #include <vector>
 
-const char *metadata = R""""(
+const char *group_metadata = R""""(
+{
+    "zarr_format": 3,
+    "node_type": "group"
+}
+)"""";
+
+const char *array_metadata = R""""(
 {
     "zarr_format": 3,
     "node_type": "array",
@@ -63,34 +70,46 @@ auto get_tmp_path() -> std::filesystem::path {
 }
 
 int main() {
+  // Create a filesystem store at a temporary path
   const std::filesystem::path tmp_path = get_tmp_path();
-
   ZarrsStorage storage = nullptr;
   zarrs_assert(zarrsCreateStorageFilesystem(tmp_path.c_str(), &storage));
   assert(storage);
 
-  ZarrsArray array = nullptr;
-  zarrs_assert(zarrsCreateArrayRW(storage, "/array", metadata, &array));
-  assert(array);
+  // Create an empty root group, write metadata, and destroy the handle
+  ZarrsGroup group = nullptr;
+  zarrs_assert(zarrsCreateGroupRW(storage, "/", group_metadata, &group));
+  assert(group);
+  zarrs_assert(zarrsGroupStoreMetadata(group));
+  zarrs_assert(zarrsDestroyGroup(group));
 
+  // Create an array at /array and store the metadata
+  ZarrsArray array = nullptr;
+  zarrs_assert(zarrsCreateArrayRW(storage, "/array", array_metadata, &array));
+  assert(array);
+  zarrs_assert(zarrsArrayStoreMetadata(array));
+
+  // Query the array dimensionality and shape
   size_t dimensionality;
   zarrs_assert(zarrsArrayGetDimensionality(array, &dimensionality));
   assert(dimensionality == 2);
-
   std::vector<uint64_t> shape(2);
   zarrs_assert(zarrsArrayGetShape(array, 2, shape.data()));
   assert(shape[0] == 8);
   assert(shape[1] == 8);
 
+  // Query the array data type
   ZarrsDataType data_type;
   zarrs_assert(zarrsArrayGetDataType(array, &data_type));
   assert(data_type == ZarrsDataType::ZARRS_FLOAT32);
   
+  // Query the chunk grid shape
   std::vector<uint64_t> chunk_grid_shape(2);
   zarrs_assert(zarrsArrayGetChunkGridShape(array, 2, chunk_grid_shape.data()));
   assert(chunk_grid_shape[0] == 2);
   assert(chunk_grid_shape[1] == 2);
 
+  // Find the chunks that intersect an array subset
   const std::vector<uint64_t> array_subset_start = {3, 4};
   const std::vector<uint64_t> array_subset_shape = {2, 2};
   std::vector<uint64_t> intersecting_chunks_start(2);
@@ -101,7 +120,7 @@ int main() {
   assert(intersecting_chunks_shape[0] == 2);
   assert(intersecting_chunks_shape[1] == 1);
 
-  // Update a subset
+  // Update a subset of the array
   size_t subset_start[] = {1, 1};
   size_t subset_shape[] = {2, 2};
   float subset_elements[] = {-1.0f, -2.0f, -3.0f, -4.0f};

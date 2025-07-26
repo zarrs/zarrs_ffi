@@ -12,12 +12,14 @@ use once_cell::sync::Lazy;
 extern crate zarrs;
 
 mod array;
+mod group;
 mod storage;
 mod version;
 
 pub use array::{
     array_read::*, array_read_write::*, array_sharded::*, array_write::*, data_type::*, *,
 };
+pub use group::{group_write::*, *};
 pub use storage::*;
 pub use version::*;
 
@@ -37,6 +39,7 @@ pub enum ZarrsResult {
     ZARRS_ERROR_UNKNOWN_CHUNK_GRID_SHAPE = -10,
     ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS = -11,
     ZARRS_ERROR_UNSUPPORTED_DATA_TYPE = -12,
+    ZARRS_ERROR_GROUP = -13,
 }
 
 static LAST_ERROR: Lazy<Mutex<String>> = Lazy::new(|| Mutex::new("".to_string()));
