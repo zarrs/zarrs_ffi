@@ -199,21 +199,11 @@ checksum = "d71b6127be86fdcfddb610f7182ac57211d4b18a3e9c82eb2d17662f2227ad6a"
 
 [[package]]
 name = "bzip2"
-version = "0.5.2"
+version = "0.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "49ecfb22d906f800d4fe833b6282cf4dc1c298f5057ca0b5445e5c209735ca47"
+checksum = "bea8dcd42434048e4f7a304411d9273a411f647446c1234a65ce0554923f4cff"
 dependencies = [
- "bzip2-sys",
-]
-
-[[package]]
-name = "bzip2-sys"
-version = "0.1.13+1.0.8"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "225bff33b2141874fe80d71e07d6eec4f85c5c216453dd96388240f96e1acc14"
-dependencies = [
- "cc",
- "pkg-config",
+ "libbz2-rs-sys",
 ]
 
 [[package]]
@@ -674,6 +664,12 @@ name = "lazy_static"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe"
+
+[[package]]
+name = "libbz2-rs-sys"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "775bf80d5878ab7c2b1080b5351a48b2f737d9f6f8b383574eebcc22be0dfccb"
 
 [[package]]
 name = "libc"
@@ -1979,9 +1975,9 @@ dependencies = [
 
 [[package]]
 name = "zarrs"
-version = "0.20.0"
+version = "0.21.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "68797789128107ed02c246573d1218670fed84e2042f6728ea9ca756ecee2683"
+checksum = "55683fb371f421cfc39325cdc98fed9bb6e9c869114827e60c875dd8f7a4aee0"
 dependencies = [
  "async-lock",
  "blosc-src",
@@ -2021,9 +2017,9 @@ dependencies = [
 
 [[package]]
 name = "zarrs_data_type"
-version = "0.3.0"
+version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a8951286d52528c94625bbca889a44f40690daa2ecea2c0108249357f7f9bf64"
+checksum = "e3d6f4333c80a511fc8ed7f84e255fcd43d38c1c752d0e0078172046e25fc839"
 dependencies = [
  "derive_more",
  "half",
@@ -2081,9 +2077,9 @@ dependencies = [
 
 [[package]]
 name = "zarrs_metadata_ext"
-version = "0.1.0"
+version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "41c838df6b7d892d46f909c6f21fed783b7ea9afe49bde68a23191cbd06ea8d5"
+checksum = "7ecad49f2a566b676292b155c4f0831a0034fee49f09ec7a1aeb895a96b98219"
 dependencies = [
  "derive_more",
  "half",
@@ -2108,9 +2104,9 @@ dependencies = [
 
 [[package]]
 name = "zarrs_registry"
-version = "0.1.1"
+version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a9c5ec5c9a5c79cad5081990fe8ed3c39086046a08e8afb7e97a104cbf316a7d"
+checksum = "286838805c24e5cdd5e65464ee70c34ae66daa3576d01ca3a87f8e1a758223ee"
 dependencies = [
  "regex",
 ]
