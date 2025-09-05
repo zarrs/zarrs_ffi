@@ -30,6 +30,7 @@ pub type ZarrsShardIndexCache = *mut ZarrsShardIndexCache_T;
 ///
 /// # Errors
 /// - Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
+/// - Returns `ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY` if `dimensionality` does not match the array dimensionality.
 ///
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
@@ -48,6 +49,9 @@ pub unsafe extern "C" fn zarrsArrayGetInnerChunkGridShape(
 
     // Get the inner chunk grid shape
     let inner_chunk_grid_shape = array_fn!(array, inner_chunk_grid_shape);
+    if inner_chunk_grid_shape.len() != dimensionality {
+        return ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY;
+    }
     let pInnerChunkShape =
         unsafe { std::slice::from_raw_parts_mut(pInnerChunkGridShape, dimensionality) };
     pInnerChunkShape.copy_from_slice(&inner_chunk_grid_shape);

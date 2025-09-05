@@ -7,8 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add `ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY`
+
 ### Changed
 - Bump `zarrs` to 0.22.0
+
+### Fixed
+- Validate dimensionality in `zarrsArrayGetShape`, `zarrsArrayGetChunkGridShape`, `zarrsArrayGetChunksInSubset`, and `zarrsArrayGetInnerChunkGridShape`
 
 ## [0.9.3] - 2025-07-27
 

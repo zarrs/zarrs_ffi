@@ -67,6 +67,7 @@ enum ZarrsResult
   ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS = -11,
   ZARRS_ERROR_UNSUPPORTED_DATA_TYPE = -12,
   ZARRS_ERROR_GROUP = -13,
+  ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY = -14,
 };
 #ifndef __cplusplus
 typedef int32_t ZarrsResult;
@@ -128,7 +129,8 @@ ZarrsResult zarrsArrayGetAttributesString(ZarrsArray array, bool pretty, char **
  * Return the number of chunks in the chunk grid.
  *
  * # Errors
- * Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
+ * - Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
+ * - Returns `ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY` if `dimensionality` does not match the array dimensionality.
  *
  * # Safety
  * If not null, `array` must be a valid `ZarrsArray` handle.
@@ -184,8 +186,9 @@ ZarrsResult zarrsArrayGetChunkSize(ZarrsArray array,
  * Return the chunks indicating the chunks intersecting `array_subset`.
  *
  * # Errors
- * Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
- * Returns `ZarrsResult::ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS` if the intersecting chunks cannot be determined.
+ * - Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
+ * - Returns `ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY` if `dimensionality` does not match the array dimensionality.
+ * - Returns `ZarrsResult::ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS` if the intersecting chunks cannot be determined.
  *
  * # Safety
  * If not null, `array` must be a valid `ZarrsArray` handle.
@@ -227,6 +230,7 @@ ZarrsResult zarrsArrayGetDimensionality(ZarrsArray array, size_t *dimensionality
  *
  * # Errors
  * - Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
+ * - Returns `ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY` if `dimensionality` does not match the array dimensionality.
  *
  * # Safety
  * `array` must be a valid `ZarrsArray` handle.
@@ -265,7 +269,8 @@ ZarrsResult zarrsArrayGetMetadataString(ZarrsArray array, bool pretty, char **pM
  * Returns the shape of the array.
  *
  * # Errors
- * Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
+ * - Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
+ * - Returns `ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY` if `dimensionality` does not match the array dimensionality.
  *
  * # Safety
  * If not null, `array` must be a valid `ZarrsArray` handle.
