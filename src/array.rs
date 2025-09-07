@@ -275,7 +275,7 @@ pub unsafe extern "C" fn zarrsArrayGetChunkGridShape(
     let chunk_grid_shape = array_fn!(array, chunk_grid_shape);
     let pChunkGridShape =
         unsafe { std::slice::from_raw_parts_mut(pChunkGridShape, dimensionality) };
-    pChunkGridShape.copy_from_slice(&chunk_grid_shape);
+    pChunkGridShape.copy_from_slice(chunk_grid_shape);
     ZarrsResult::ZARRS_SUCCESS
 }
 
