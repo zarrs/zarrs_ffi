@@ -30,7 +30,7 @@ pub type ZarrsShardIndexCache = *mut ZarrsShardIndexCache_T;
 ///
 /// # Errors
 /// - Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
-/// 
+///
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
 /// `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pInnerChunkGridShape`.
