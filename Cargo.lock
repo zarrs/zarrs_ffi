@@ -2088,8 +2088,8 @@ checksum = "5c573471f125075647d03df72e026074b7203790d41351cd6edc96f46bcccd36"
 
 [[package]]
 name = "zarrs"
-version = "0.22.0-beta.0"
-source = "git+https://github.com/zarrs/zarrs.git?tag=zarrs-v0.22.0-beta.0#5545c279ad4056bd6cd38d18b2a889fc079318bc"
+version = "0.22.0-beta.1"
+source = "git+https://github.com/zarrs/zarrs.git?tag=zarrs-v0.22.0-beta.1#cd1ee50c7a7c4af3002ffe4a8314c568c9b11b38"
 dependencies = [
  "async-lock",
  "blosc-src",
@@ -2134,7 +2134,7 @@ dependencies = [
 [[package]]
 name = "zarrs_data_type"
 version = "0.3.3"
-source = "git+https://github.com/zarrs/zarrs.git?tag=zarrs-v0.22.0-beta.0#5545c279ad4056bd6cd38d18b2a889fc079318bc"
+source = "git+https://github.com/zarrs/zarrs.git?tag=zarrs-v0.22.0-beta.1#cd1ee50c7a7c4af3002ffe4a8314c568c9b11b38"
 dependencies = [
  "derive_more",
  "half",
@@ -2161,7 +2161,7 @@ dependencies = [
 [[package]]
 name = "zarrs_filesystem"
 version = "0.3.0"
-source = "git+https://github.com/zarrs/zarrs.git?tag=zarrs-v0.22.0-beta.0#5545c279ad4056bd6cd38d18b2a889fc079318bc"
+source = "git+https://github.com/zarrs/zarrs.git?tag=zarrs-v0.22.0-beta.1#cd1ee50c7a7c4af3002ffe4a8314c568c9b11b38"
 dependencies = [
  "bytes",
  "derive_more",
@@ -2178,7 +2178,7 @@ dependencies = [
 [[package]]
 name = "zarrs_metadata"
 version = "0.6.0"
-source = "git+https://github.com/zarrs/zarrs.git?tag=zarrs-v0.22.0-beta.0#5545c279ad4056bd6cd38d18b2a889fc079318bc"
+source = "git+https://github.com/zarrs/zarrs.git?tag=zarrs-v0.22.0-beta.1#cd1ee50c7a7c4af3002ffe4a8314c568c9b11b38"
 dependencies = [
  "derive_more",
  "half",
@@ -2191,7 +2191,7 @@ dependencies = [
 [[package]]
 name = "zarrs_metadata_ext"
 version = "0.2.0"
-source = "git+https://github.com/zarrs/zarrs.git?tag=zarrs-v0.22.0-beta.0#5545c279ad4056bd6cd38d18b2a889fc079318bc"
+source = "git+https://github.com/zarrs/zarrs.git?tag=zarrs-v0.22.0-beta.1#cd1ee50c7a7c4af3002ffe4a8314c568c9b11b38"
 dependencies = [
  "derive_more",
  "half",
@@ -2208,7 +2208,7 @@ dependencies = [
 [[package]]
 name = "zarrs_plugin"
 version = "0.2.2"
-source = "git+https://github.com/zarrs/zarrs.git?tag=zarrs-v0.22.0-beta.0#5545c279ad4056bd6cd38d18b2a889fc079318bc"
+source = "git+https://github.com/zarrs/zarrs.git?tag=zarrs-v0.22.0-beta.1#cd1ee50c7a7c4af3002ffe4a8314c568c9b11b38"
 dependencies = [
  "thiserror 2.0.16",
 ]
@@ -2216,7 +2216,7 @@ dependencies = [
 [[package]]
 name = "zarrs_registry"
 version = "0.1.4"
-source = "git+https://github.com/zarrs/zarrs.git?tag=zarrs-v0.22.0-beta.0#5545c279ad4056bd6cd38d18b2a889fc079318bc"
+source = "git+https://github.com/zarrs/zarrs.git?tag=zarrs-v0.22.0-beta.1#cd1ee50c7a7c4af3002ffe4a8314c568c9b11b38"
 dependencies = [
  "regex",
 ]
@@ -2224,7 +2224,7 @@ dependencies = [
 [[package]]
 name = "zarrs_storage"
 version = "0.4.0"
-source = "git+https://github.com/zarrs/zarrs.git?tag=zarrs-v0.22.0-beta.0#5545c279ad4056bd6cd38d18b2a889fc079318bc"
+source = "git+https://github.com/zarrs/zarrs.git?tag=zarrs-v0.22.0-beta.1#cd1ee50c7a7c4af3002ffe4a8314c568c9b11b38"
 dependencies = [
  "auto_impl",
  "bytes",
