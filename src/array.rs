@@ -194,7 +194,8 @@ pub unsafe extern "C" fn zarrsArrayGetDimensionality(
 /// Returns the shape of the array.
 ///
 /// # Errors
-/// Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
+/// - Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
+/// - Returns `ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY` if `dimensionality` does not match the array dimensionality.
 ///
 /// # Safety
 /// If not null, `array` must be a valid `ZarrsArray` handle.
@@ -210,6 +211,9 @@ pub unsafe extern "C" fn zarrsArrayGetShape(
     }
     let array = &**array;
     let shape = array_fn!(array, shape);
+    if shape.len() != dimensionality {
+        return ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY;
+    }
     let pShape = unsafe { std::slice::from_raw_parts_mut(pShape, dimensionality) };
     pShape.copy_from_slice(shape);
     ZarrsResult::ZARRS_SUCCESS
@@ -257,7 +261,8 @@ pub unsafe extern "C" fn zarrsArrayGetDataType(
 /// Return the number of chunks in the chunk grid.
 ///
 /// # Errors
-/// Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
+/// - Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
+/// - Returns `ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY` if `dimensionality` does not match the array dimensionality.
 ///
 /// # Safety
 /// If not null, `array` must be a valid `ZarrsArray` handle.
@@ -273,6 +278,9 @@ pub unsafe extern "C" fn zarrsArrayGetChunkGridShape(
     }
     let array = &**array;
     let chunk_grid_shape = array_fn!(array, chunk_grid_shape);
+    if chunk_grid_shape.len() != dimensionality {
+        return ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY;
+    }
     let pChunkGridShape =
         unsafe { std::slice::from_raw_parts_mut(pChunkGridShape, dimensionality) };
     pChunkGridShape.copy_from_slice(chunk_grid_shape);
@@ -282,8 +290,9 @@ pub unsafe extern "C" fn zarrsArrayGetChunkGridShape(
 /// Return the chunks indicating the chunks intersecting `array_subset`.
 ///
 /// # Errors
-/// Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
-/// Returns `ZarrsResult::ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS` if the intersecting chunks cannot be determined.
+/// - Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
+/// - Returns `ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY` if `dimensionality` does not match the array dimensionality.
+/// - Returns `ZarrsResult::ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS` if the intersecting chunks cannot be determined.
 ///
 /// # Safety
 /// If not null, `array` must be a valid `ZarrsArray` handle.
@@ -307,14 +316,18 @@ pub unsafe extern "C" fn zarrsArrayGetChunksInSubset(
         std::iter::zip(subset_start, subset_shape).map(|(&start, &shape)| start..start + shape),
     );
     let shape = array_fn!(array, chunks_in_array_subset, &array_subset);
-    if let Ok(Some(chunks_subset)) = shape {
-        let pChunksStart = unsafe { std::slice::from_raw_parts_mut(pChunksStart, dimensionality) };
-        pChunksStart.copy_from_slice(chunks_subset.start());
-        let pChunksShape = unsafe { std::slice::from_raw_parts_mut(pChunksShape, dimensionality) };
-        pChunksShape.copy_from_slice(chunks_subset.shape());
-        ZarrsResult::ZARRS_SUCCESS
-    } else {
-        ZarrsResult::ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS
+    match shape {
+        Ok(Some(chunks_subset)) => {
+            let pChunksStart =
+                unsafe { std::slice::from_raw_parts_mut(pChunksStart, dimensionality) };
+            pChunksStart.copy_from_slice(chunks_subset.start());
+            let pChunksShape =
+                unsafe { std::slice::from_raw_parts_mut(pChunksShape, dimensionality) };
+            pChunksShape.copy_from_slice(chunks_subset.shape());
+            ZarrsResult::ZARRS_SUCCESS
+        }
+        Ok(None) => ZarrsResult::ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS,
+        Err(_) => ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY,
     }
 }
 

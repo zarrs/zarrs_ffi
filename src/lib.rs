@@ -40,6 +40,7 @@ pub enum ZarrsResult {
     ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS = -11,
     ZARRS_ERROR_UNSUPPORTED_DATA_TYPE = -12,
     ZARRS_ERROR_GROUP = -13,
+    ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY = -14,
 }
 
 static LAST_ERROR: Lazy<Mutex<String>> = Lazy::new(|| Mutex::new("".to_string()));
