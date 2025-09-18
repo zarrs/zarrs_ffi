@@ -44,7 +44,8 @@ var zarrs_8h =
       [ "ZARRS_ERROR_UNKNOWN_CHUNK_GRID_SHAPE", "zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5aec22658a78453362d718227eec5c13b0", null ],
       [ "ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS", "zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a160e034dab83d174bac8be870e7dd013", null ],
       [ "ZARRS_ERROR_UNSUPPORTED_DATA_TYPE", "zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5af3c4e6147489571c36f76b92268ef9f8", null ],
-      [ "ZARRS_ERROR_GROUP", "zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5ad785e83d75b9078d5c9e27b762e4882a", null ]
+      [ "ZARRS_ERROR_GROUP", "zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5ad785e83d75b9078d5c9e27b762e4882a", null ],
+      [ "ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY", "zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a3859f8488bc653d1a9647628f358a8cd", null ]
     ] ],
     [ "zarrsArrayGetAttributes", "zarrs_8h.html#a4130d1ef70418af1fed44af956d5626d", null ],
     [ "zarrsArrayGetAttributesString", "zarrs_8h.html#aec3f21673030c3b6be603192c02da235", null ],
