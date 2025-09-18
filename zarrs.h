@@ -129,7 +129,6 @@ ZarrsResult zarrsArrayGetAttributesString(ZarrsArray array, bool pretty, char **
  *
  * # Errors
  * Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
- * Returns `ZarrsResult::ZARRS_ERROR_UNKNOWN_CHUNK_GRID_SHAPE` if the chunk grid shape cannot be determined.
  *
  * # Safety
  * If not null, `array` must be a valid `ZarrsArray` handle.
@@ -225,6 +224,9 @@ ZarrsResult zarrsArrayGetDimensionality(ZarrsArray array, size_t *dimensionality
  * Get the shape of the inner chunk grid of a sharded array.
  *
  * If the array is not sharded, the contents of `pInnerChunkGridShape` will equal the standard chunk grid shape.
+ *
+ * # Errors
+ * - Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
  *
  * # Safety
  * `array` must be a valid `ZarrsArray` handle.

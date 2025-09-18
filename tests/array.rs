@@ -24,8 +24,8 @@ fn ffi_array_write_rust_read_c() {
     let array_path = "/array";
     let array = zarrs::array::ArrayBuilder::new(
         vec![8, 8], // array shape
+        vec![4, 4], // regular chunk shape
         DataType::Float32,
-        vec![4, 4].try_into().unwrap(), // regular chunk shape
         FillValue::from(f32::NAN),
     )
     .dimension_names(["y", "x"].into())
