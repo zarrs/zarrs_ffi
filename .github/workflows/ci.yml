@@ -21,3 +21,12 @@ jobs:
       - run: cargo test
       - run: cargo fmt --all -- --check
       - run: cargo clippy -- -D warnings
+
+  msrv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@1.82
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo build --features cbindgen
+      - run: cargo test
