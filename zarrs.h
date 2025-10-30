@@ -18,6 +18,31 @@
 #define zarrs_assert(expr) assert(ZARRS_SUCCESS == expr)
 
 
+enum ZarrsResult
+#ifdef __cplusplus
+  : int32_t
+#endif // __cplusplus
+ {
+  ZARRS_SUCCESS = 0,
+  ZARRS_ERROR_NULL_PTR = -1,
+  ZARRS_ERROR_STORAGE = -2,
+  ZARRS_ERROR_ARRAY = -3,
+  ZARRS_ERROR_BUFFER_LENGTH = -4,
+  ZARRS_ERROR_INVALID_INDICES = -5,
+  ZARRS_ERROR_NODE_PATH = -6,
+  ZARRS_ERROR_STORE_PREFIX = -7,
+  ZARRS_ERROR_INVALID_METADATA = -8,
+  ZARRS_ERROR_STORAGE_CAPABILITY = -9,
+  ZARRS_ERROR_UNKNOWN_CHUNK_GRID_SHAPE = -10,
+  ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS = -11,
+  ZARRS_ERROR_UNSUPPORTED_DATA_TYPE = -12,
+  ZARRS_ERROR_GROUP = -13,
+  ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY = -14,
+};
+#ifndef __cplusplus
+typedef int32_t ZarrsResult;
+#endif // __cplusplus
+
 /**
  * A zarrs data type.
  */
@@ -46,31 +71,6 @@ enum ZarrsDataType
 };
 #ifndef __cplusplus
 typedef int32_t ZarrsDataType;
-#endif // __cplusplus
-
-enum ZarrsResult
-#ifdef __cplusplus
-  : int32_t
-#endif // __cplusplus
- {
-  ZARRS_SUCCESS = 0,
-  ZARRS_ERROR_NULL_PTR = -1,
-  ZARRS_ERROR_STORAGE = -2,
-  ZARRS_ERROR_ARRAY = -3,
-  ZARRS_ERROR_BUFFER_LENGTH = -4,
-  ZARRS_ERROR_INVALID_INDICES = -5,
-  ZARRS_ERROR_NODE_PATH = -6,
-  ZARRS_ERROR_STORE_PREFIX = -7,
-  ZARRS_ERROR_INVALID_METADATA = -8,
-  ZARRS_ERROR_STORAGE_CAPABILITY = -9,
-  ZARRS_ERROR_UNKNOWN_CHUNK_GRID_SHAPE = -10,
-  ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS = -11,
-  ZARRS_ERROR_UNSUPPORTED_DATA_TYPE = -12,
-  ZARRS_ERROR_GROUP = -13,
-  ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY = -14,
-};
-#ifndef __cplusplus
-typedef int32_t ZarrsResult;
 #endif // __cplusplus
 
 typedef struct ZarrsArray_T ZarrsArray_T;
