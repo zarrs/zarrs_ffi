@@ -135,10 +135,10 @@ Macros</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a18fb58b20dcfb89b48205a4bb079f4df" id="r_a18fb58b20dcfb89b48205a4bb079f4df"><td class="memItemLeft" align="right" valign="top">typedef int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a18fb58b20dcfb89b48205a4bb079f4df">ZarrsDataType</a></td></tr>
-<tr class="separator:a18fb58b20dcfb89b48205a4bb079f4df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a33440b28bddcad5e68aa86b3abddb3bb" id="r_a33440b28bddcad5e68aa86b3abddb3bb"><td class="memItemLeft" align="right" valign="top">typedef int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a33440b28bddcad5e68aa86b3abddb3bb">ZarrsResult</a></td></tr>
 <tr class="separator:a33440b28bddcad5e68aa86b3abddb3bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a18fb58b20dcfb89b48205a4bb079f4df" id="r_a18fb58b20dcfb89b48205a4bb079f4df"><td class="memItemLeft" align="right" valign="top">typedef int32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a18fb58b20dcfb89b48205a4bb079f4df">ZarrsDataType</a></td></tr>
+<tr class="separator:a18fb58b20dcfb89b48205a4bb079f4df"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf976c06473973c866c0b5f1a2791352" id="r_adf976c06473973c866c0b5f1a2791352"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="zarrs_8h.html#adf976c06473973c866c0b5f1a2791352">ZarrsArray_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#adf976c06473973c866c0b5f1a2791352">ZarrsArray_T</a></td></tr>
 <tr class="separator:adf976c06473973c866c0b5f1a2791352"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a628ea1605a5cb5f20dac39d8ac661784" id="r_a628ea1605a5cb5f20dac39d8ac661784"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="zarrs_8h.html#a628ea1605a5cb5f20dac39d8ac661784">ZarrsGroup_T</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a628ea1605a5cb5f20dac39d8ac661784">ZarrsGroup_T</a></td></tr>
@@ -158,6 +158,28 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="enum-members" name="enum-members"></a>
 Enumerations</h2></td></tr>
+<tr class="memitem:a05a3292fce4b0aa50a20f784f3cef3d5" id="r_a05a3292fce4b0aa50a20f784f3cef3d5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a> { <br />
+&#160;&#160;<a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a4cc3a3019ce06c0323118aa6c4511b11">ZARRS_SUCCESS</a> = 0
+, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5ae13116fbdf40cc7f3160996a5a4654a0">ZARRS_ERROR_NULL_PTR</a> = -1
+, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a1ab5f9bc61c5f06f9941faacf9202688">ZARRS_ERROR_STORAGE</a> = -2
+, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a6a41966dbf432d97305611293b6df8af">ZARRS_ERROR_ARRAY</a> = -3
+, <br />
+&#160;&#160;<a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a4ff1545359784fe8f780624b52776e42">ZARRS_ERROR_BUFFER_LENGTH</a> = -4
+, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5ac969b6f0d4b1738485cbd331c0150e0b">ZARRS_ERROR_INVALID_INDICES</a> = -5
+, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5ab693f7255107e7e5bc86f7e69d8efa29">ZARRS_ERROR_NODE_PATH</a> = -6
+, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5ade46b6787901d69372145264d5a55a3b">ZARRS_ERROR_STORE_PREFIX</a> = -7
+, <br />
+&#160;&#160;<a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a1406cf060d5abee2cd2b3a2e7fd3d719">ZARRS_ERROR_INVALID_METADATA</a> = -8
+, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5adb95d3f437c441d77cff45343311c2c1">ZARRS_ERROR_STORAGE_CAPABILITY</a> = -9
+, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5aec22658a78453362d718227eec5c13b0">ZARRS_ERROR_UNKNOWN_CHUNK_GRID_SHAPE</a> = -10
+, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a160e034dab83d174bac8be870e7dd013">ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS</a> = -11
+, <br />
+&#160;&#160;<a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5af3c4e6147489571c36f76b92268ef9f8">ZARRS_ERROR_UNSUPPORTED_DATA_TYPE</a> = -12
+, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5ad785e83d75b9078d5c9e27b762e4882a">ZARRS_ERROR_GROUP</a> = -13
+, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a3859f8488bc653d1a9647628f358a8cd">ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY</a> = -14
+<br />
+ }</td></tr>
+<tr class="separator:a05a3292fce4b0aa50a20f784f3cef3d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae1de38e081bcf18df82e42691dcdac47" id="r_ae1de38e081bcf18df82e42691dcdac47"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#ae1de38e081bcf18df82e42691dcdac47">ZarrsDataType</a> { <br />
 &#160;&#160;<a class="el" href="zarrs_8h.html#ae1de38e081bcf18df82e42691dcdac47a374e0b1ad7d5e60a02f61df1ffa91681">ZARRS_UNDEFINED</a> = -1
 , <a class="el" href="zarrs_8h.html#ae1de38e081bcf18df82e42691dcdac47ae25da467483de0f4ed5c49c3fe13ce65">ZARRS_BOOL</a> = 0
@@ -183,28 +205,6 @@ Enumerations</h2></td></tr>
 <br />
  }</td></tr>
 <tr class="separator:ae1de38e081bcf18df82e42691dcdac47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05a3292fce4b0aa50a20f784f3cef3d5" id="r_a05a3292fce4b0aa50a20f784f3cef3d5"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5">ZarrsResult</a> { <br />
-&#160;&#160;<a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a4cc3a3019ce06c0323118aa6c4511b11">ZARRS_SUCCESS</a> = 0
-, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5ae13116fbdf40cc7f3160996a5a4654a0">ZARRS_ERROR_NULL_PTR</a> = -1
-, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a1ab5f9bc61c5f06f9941faacf9202688">ZARRS_ERROR_STORAGE</a> = -2
-, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a6a41966dbf432d97305611293b6df8af">ZARRS_ERROR_ARRAY</a> = -3
-, <br />
-&#160;&#160;<a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a4ff1545359784fe8f780624b52776e42">ZARRS_ERROR_BUFFER_LENGTH</a> = -4
-, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5ac969b6f0d4b1738485cbd331c0150e0b">ZARRS_ERROR_INVALID_INDICES</a> = -5
-, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5ab693f7255107e7e5bc86f7e69d8efa29">ZARRS_ERROR_NODE_PATH</a> = -6
-, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5ade46b6787901d69372145264d5a55a3b">ZARRS_ERROR_STORE_PREFIX</a> = -7
-, <br />
-&#160;&#160;<a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a1406cf060d5abee2cd2b3a2e7fd3d719">ZARRS_ERROR_INVALID_METADATA</a> = -8
-, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5adb95d3f437c441d77cff45343311c2c1">ZARRS_ERROR_STORAGE_CAPABILITY</a> = -9
-, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5aec22658a78453362d718227eec5c13b0">ZARRS_ERROR_UNKNOWN_CHUNK_GRID_SHAPE</a> = -10
-, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a160e034dab83d174bac8be870e7dd013">ZARRS_ERROR_UNKNOWN_INTERSECTING_CHUNKS</a> = -11
-, <br />
-&#160;&#160;<a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5af3c4e6147489571c36f76b92268ef9f8">ZARRS_ERROR_UNSUPPORTED_DATA_TYPE</a> = -12
-, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5ad785e83d75b9078d5c9e27b762e4882a">ZARRS_ERROR_GROUP</a> = -13
-, <a class="el" href="zarrs_8h.html#a05a3292fce4b0aa50a20f784f3cef3d5a3859f8488bc653d1a9647628f358a8cd">ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY</a> = -14
-<br />
- }</td></tr>
-<tr class="separator:a05a3292fce4b0aa50a20f784f3cef3d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -358,7 +358,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00048">48</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00073">73</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
 
 </div>
 </div>
@@ -407,7 +407,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00073">73</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00043">43</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
 
 </div>
 </div>
@@ -510,7 +510,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="ae1de38e081bcf18df82e42691dcdac47a26dc00ca1ecdcb0cd89339fcdde8704f" name="ae1de38e081bcf18df82e42691dcdac47a26dc00ca1ecdcb0cd89339fcdde8704f"></a>ZARRS_BFLOAT16&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00024">24</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00049">49</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
 
 </div>
 </div>
@@ -543,7 +543,7 @@ Functions</h2></td></tr>
 <tr><td class="fieldname"><a id="a05a3292fce4b0aa50a20f784f3cef3d5a3859f8488bc653d1a9647628f358a8cd" name="a05a3292fce4b0aa50a20f784f3cef3d5a3859f8488bc653d1a9647628f358a8cd"></a>ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00051">51</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="zarrs_8h_source.html#l00021">21</a> of file <a class="el" href="zarrs_8h_source.html">zarrs.h</a>.</p>
 
 </div>
 </div>
