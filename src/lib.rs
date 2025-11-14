@@ -12,6 +12,7 @@ use once_cell::sync::Lazy;
 extern crate zarrs;
 
 mod array;
+mod config;
 mod group;
 mod storage;
 mod version;
@@ -19,6 +20,7 @@ mod version;
 pub use array::{
     array_read::*, array_read_write::*, array_sharded::*, array_write::*, data_type::*, *,
 };
+pub use config::*;
 pub use group::{group_write::*, *};
 pub use storage::*;
 pub use version::*;
@@ -41,6 +43,7 @@ pub enum ZarrsResult {
     ZARRS_ERROR_UNSUPPORTED_DATA_TYPE = -12,
     ZARRS_ERROR_GROUP = -13,
     ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY = -14,
+    ZARRS_ERROR_CONFIG = -15,
 }
 
 static LAST_ERROR: Lazy<Mutex<String>> = Lazy::new(|| Mutex::new("".to_string()));
