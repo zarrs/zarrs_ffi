@@ -38,6 +38,7 @@ enum ZarrsResult
   ZARRS_ERROR_UNSUPPORTED_DATA_TYPE = -12,
   ZARRS_ERROR_GROUP = -13,
   ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY = -14,
+  ZARRS_ERROR_CONFIG = -15,
 };
 #ifndef __cplusplus
 typedef int32_t ZarrsResult;
@@ -538,6 +539,17 @@ ZarrsResult zarrsDestroyStorage(ZarrsStorage storage);
 ZarrsResult zarrsFreeString(char *string);
 
 /**
+ * Get the global zarrs configuration as a JSON string.
+ *
+ * # Safety
+ * The caller must free the returned string with `zarrsStringFree`.
+ *
+ * # Errors
+ * Returns `ZARRS_ERROR_CONFIG` if serialization fails.
+ */
+ZarrsResult zarrsGetGlobalConfig(char **pJsonString);
+
+/**
  * Get the group attributes as a JSON string.
  *
  * The string must be freed with `zarrsFreeString`.
@@ -596,6 +608,17 @@ ZarrsResult zarrsOpenArrayRW(ZarrsStorage storage, const char* path, ZarrsArray 
  * `pGroup` must be a valid pointer to a `ZarrsGroup` handle.
  */
 ZarrsResult zarrsOpenGroupRW(ZarrsStorage storage, const char* path, ZarrsGroup *pGroup);
+
+/**
+ * Set the global zarrs configuration from a JSON string.
+ *
+ * # Safety
+ * The caller must provide a valid JSON string representing a zarrs Config.
+ *
+ * # Errors
+ * Returns `ZARRS_ERROR_CONFIG` if deserialization fails or the JSON is invalid.
+ */
+ZarrsResult zarrsSetGlobalConfig(const char* jsonString);
 
 /**
  * Get the zarrs version.

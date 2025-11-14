@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Add `zarrs{Get,Set}GlobalConfig`
+
 ### Changed
 - Bump `zarrs` to 0.22.8
 
