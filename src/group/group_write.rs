@@ -1,8 +1,8 @@
 use zarrs::{group::Group, storage::WritableStorageTraits};
 
 use crate::{
+    LAST_ERROR, ZarrsResult,
     group::{ZarrsGroup, ZarrsGroupEnum},
-    ZarrsResult, LAST_ERROR,
 };
 
 // use super::group_fn;
@@ -26,12 +26,13 @@ fn zarrsGroupStoreMetadataImpl<T: WritableStorageTraits + ?Sized + 'static>(
 ///
 /// # Safety
 /// `group` must be a valid `ZarrsGroup` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsGroupStoreMetadata(group: ZarrsGroup) -> ZarrsResult {
     if group.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let group = &**group;
+    // SAFETY: group is not null, and the caller guarantees it is a valid ZarrsGroup handle.
+    let group = unsafe { &**group };
     match group {
         ZarrsGroupEnum::W(group) => zarrsGroupStoreMetadataImpl(group),
         ZarrsGroupEnum::RW(group) => zarrsGroupStoreMetadataImpl(group),

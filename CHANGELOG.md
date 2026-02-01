@@ -7,8 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.10.0] - 2026-01-02
+
 ### Changed
-- Bump `zarrs` to 0.22.8
+- Bump `zarrs` to 0.23.0
+- **Breaking**: Bump MSRV to Rust 1.91
+- **Breaking**: Rename `zarrsArrayGetInnerChunkGridShape` to `zarrsArrayGetSubChunkGridShape`
+- **Breaking**: Rename `zarrsArrayGetInnerChunkShape` to `zarrsArrayGetSubChunkShape`
+- **Breaking**: Rename `zarrsArrayRetrieveInnerChunk` to `zarrsArrayRetrieveSubChunk`
 
 ## [0.9.5] - 2025-10-30
 
@@ -231,7 +237,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
  - Initial public release
 
-[unreleased]: https://github.com/LDeakin/zarrs_ffi/compare/v0.9.5...HEAD
+[unreleased]: https://github.com/LDeakin/zarrs_ffi/compare/v0.10.0...HEAD
+[0.10.0]: https://github.com/LDeakin/zarrs_ffi/releases/tag/v0.10.0
 [0.9.5]: https://github.com/LDeakin/zarrs_ffi/releases/tag/v0.9.5
 [0.9.4]: https://github.com/LDeakin/zarrs_ffi/releases/tag/v0.9.4
 [0.9.3]: https://github.com/LDeakin/zarrs_ffi/releases/tag/v0.9.3

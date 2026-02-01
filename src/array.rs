@@ -4,17 +4,16 @@ pub mod array_sharded;
 pub mod array_write;
 pub mod data_type;
 
-use std::ffi::{c_char, CString};
+use std::ffi::{CString, c_char};
 
 use ffi_support::FfiStr;
-use zarrs::{
-    array::{chunk_shape_to_array_shape, Array, ArrayMetadata, DataType},
-    array_subset::ArraySubset,
+use zarrs::array::{
+    Array, ArrayMetadata, ArraySubset, chunk_shape_to_array_shape, data_type as dt,
 };
 
 use crate::{
+    LAST_ERROR, ZarrsDataType, ZarrsResult,
     storage::{ZarrsStorage, ZarrsStorageEnum},
-    ZarrsDataType, ZarrsResult, LAST_ERROR,
 };
 
 #[doc(hidden)]
@@ -78,7 +77,7 @@ pub type ZarrsArray = *mut ZarrsArray_T;
 ///
 /// # Safety
 /// `pArray` must be a valid pointer to a `ZarrsArray` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsOpenArrayRW(
     storage: ZarrsStorage,
     path: FfiStr,
@@ -89,12 +88,16 @@ pub unsafe extern "C" fn zarrsOpenArrayRW(
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
 
-    let storage = &**storage;
+    // SAFETY: storage is not null, and the caller guarantees it is a valid ZarrsStorage handle.
+    let storage = unsafe { &**storage };
 
     if let ZarrsStorageEnum::RW(storage) = storage {
         match Array::open(storage.clone(), path.into()) {
             Ok(array) => {
-                *pArray = Box::into_raw(Box::new(ZarrsArray_T(ZarrsArrayEnum::RW(array))));
+                // SAFETY: pArray is a valid pointer per the function's safety contract.
+                unsafe {
+                    *pArray = Box::into_raw(Box::new(ZarrsArray_T(ZarrsArrayEnum::RW(array))));
+                }
                 ZarrsResult::ZARRS_SUCCESS
             }
             Err(err) => {
@@ -115,7 +118,7 @@ pub unsafe extern "C" fn zarrsOpenArrayRW(
 ///
 /// # Safety
 /// `pArray` must be a valid pointer to a `ZarrsArray` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsCreateArrayRW(
     storage: ZarrsStorage,
     path: FfiStr,
@@ -127,7 +130,8 @@ pub unsafe extern "C" fn zarrsCreateArrayRW(
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
 
-    let storage = &**storage;
+    // SAFETY: storage is not null, and the caller guarantees it is a valid ZarrsStorage handle.
+    let storage = unsafe { &**storage };
 
     let metadata = match ArrayMetadata::try_from(metadata.as_str()) {
         Ok(metadata) => metadata,
@@ -140,7 +144,10 @@ pub unsafe extern "C" fn zarrsCreateArrayRW(
     if let ZarrsStorageEnum::RW(storage) = storage {
         match Array::new_with_metadata(storage.clone(), path.into(), metadata) {
             Ok(array) => {
-                *pArray = Box::into_raw(Box::new(ZarrsArray_T(ZarrsArrayEnum::RW(array))));
+                // SAFETY: pArray is a valid pointer per the function's safety contract.
+                unsafe {
+                    *pArray = Box::into_raw(Box::new(ZarrsArray_T(ZarrsArrayEnum::RW(array))));
+                }
                 ZarrsResult::ZARRS_SUCCESS
             }
             Err(err) => {
@@ -161,11 +168,12 @@ pub unsafe extern "C" fn zarrsCreateArrayRW(
 ///
 /// # Safety
 /// If not null, `array` must be a valid `ZarrsArray` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsDestroyArray(array: ZarrsArray) -> ZarrsResult {
     if array.is_null() {
         ZarrsResult::ZARRS_ERROR_NULL_PTR
     } else {
+        // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
         unsafe { array.to_owned().drop_in_place() };
         ZarrsResult::ZARRS_SUCCESS
     }
@@ -178,7 +186,7 @@ pub unsafe extern "C" fn zarrsDestroyArray(array: ZarrsArray) -> ZarrsResult {
 ///
 /// # Safety
 /// If not null, `array` must be a valid `ZarrsArray` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsArrayGetDimensionality(
     array: ZarrsArray,
     dimensionality: *mut usize,
@@ -186,8 +194,10 @@ pub unsafe extern "C" fn zarrsArrayGetDimensionality(
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
-    *dimensionality = array_fn!(array, dimensionality);
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
+    // SAFETY: dimensionality is a valid pointer per the function's safety contract.
+    unsafe { *dimensionality = array_fn!(array, dimensionality) };
     ZarrsResult::ZARRS_SUCCESS
 }
 
@@ -200,7 +210,7 @@ pub unsafe extern "C" fn zarrsArrayGetDimensionality(
 /// # Safety
 /// If not null, `array` must be a valid `ZarrsArray` handle.
 /// `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pShape`.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsArrayGetShape(
     array: ZarrsArray,
     dimensionality: usize,
@@ -209,11 +219,13 @@ pub unsafe extern "C" fn zarrsArrayGetShape(
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
     let shape = array_fn!(array, shape);
     if shape.len() != dimensionality {
         return ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY;
     }
+    // SAFETY: pShape points to an array of length dimensionality per the function's safety contract.
     let pShape = unsafe { std::slice::from_raw_parts_mut(pShape, dimensionality) };
     pShape.copy_from_slice(shape);
     ZarrsResult::ZARRS_SUCCESS
@@ -226,7 +238,7 @@ pub unsafe extern "C" fn zarrsArrayGetShape(
 ///
 /// # Safety
 /// If not null, `array` must be a valid `ZarrsArray` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsArrayGetDataType(
     array: ZarrsArray,
     pDataType: *mut ZarrsDataType,
@@ -234,27 +246,46 @@ pub unsafe extern "C" fn zarrsArrayGetDataType(
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
     let data_type = array_fn!(array, data_type);
-    *pDataType = match data_type {
-        DataType::Bool => ZarrsDataType::ZARRS_BOOL,
-        DataType::Int8 => ZarrsDataType::ZARRS_INT8,
-        DataType::Int16 => ZarrsDataType::ZARRS_INT16,
-        DataType::Int32 => ZarrsDataType::ZARRS_INT32,
-        DataType::Int64 => ZarrsDataType::ZARRS_INT64,
-        DataType::UInt8 => ZarrsDataType::ZARRS_UINT8,
-        DataType::UInt16 => ZarrsDataType::ZARRS_UINT16,
-        DataType::UInt32 => ZarrsDataType::ZARRS_UINT32,
-        DataType::UInt64 => ZarrsDataType::ZARRS_UINT64,
-        DataType::Float16 => ZarrsDataType::ZARRS_FLOAT16,
-        DataType::Float32 => ZarrsDataType::ZARRS_FLOAT32,
-        DataType::Float64 => ZarrsDataType::ZARRS_FLOAT64,
-        DataType::BFloat16 => ZarrsDataType::ZARRS_BFLOAT16,
-        DataType::Complex64 => ZarrsDataType::ZARRS_COMPLEX64,
-        DataType::Complex128 => ZarrsDataType::ZARRS_COMPLEX128,
-        DataType::RawBits(_) => ZarrsDataType::ZARRS_RAW_BITS,
-        _ => ZarrsDataType::ZARRS_UNDEFINED,
+    let zarrs_data_type = if data_type.is::<dt::BoolDataType>() {
+        ZarrsDataType::ZARRS_BOOL
+    } else if data_type.is::<dt::Int8DataType>() {
+        ZarrsDataType::ZARRS_INT8
+    } else if data_type.is::<dt::Int16DataType>() {
+        ZarrsDataType::ZARRS_INT16
+    } else if data_type.is::<dt::Int32DataType>() {
+        ZarrsDataType::ZARRS_INT32
+    } else if data_type.is::<dt::Int64DataType>() {
+        ZarrsDataType::ZARRS_INT64
+    } else if data_type.is::<dt::UInt8DataType>() {
+        ZarrsDataType::ZARRS_UINT8
+    } else if data_type.is::<dt::UInt16DataType>() {
+        ZarrsDataType::ZARRS_UINT16
+    } else if data_type.is::<dt::UInt32DataType>() {
+        ZarrsDataType::ZARRS_UINT32
+    } else if data_type.is::<dt::UInt64DataType>() {
+        ZarrsDataType::ZARRS_UINT64
+    } else if data_type.is::<dt::Float16DataType>() {
+        ZarrsDataType::ZARRS_FLOAT16
+    } else if data_type.is::<dt::Float32DataType>() {
+        ZarrsDataType::ZARRS_FLOAT32
+    } else if data_type.is::<dt::Float64DataType>() {
+        ZarrsDataType::ZARRS_FLOAT64
+    } else if data_type.is::<dt::BFloat16DataType>() {
+        ZarrsDataType::ZARRS_BFLOAT16
+    } else if data_type.is::<dt::Complex64DataType>() {
+        ZarrsDataType::ZARRS_COMPLEX64
+    } else if data_type.is::<dt::Complex128DataType>() {
+        ZarrsDataType::ZARRS_COMPLEX128
+    } else if data_type.is::<dt::RawBitsDataType>() {
+        ZarrsDataType::ZARRS_RAW_BITS
+    } else {
+        ZarrsDataType::ZARRS_UNDEFINED
     };
+    // SAFETY: pDataType is a valid pointer per the function's safety contract.
+    unsafe { *pDataType = zarrs_data_type };
     ZarrsResult::ZARRS_SUCCESS
 }
 
@@ -267,7 +298,7 @@ pub unsafe extern "C" fn zarrsArrayGetDataType(
 /// # Safety
 /// If not null, `array` must be a valid `ZarrsArray` handle.
 /// `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pChunkGridShape`.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsArrayGetChunkGridShape(
     array: ZarrsArray,
     dimensionality: usize,
@@ -276,11 +307,13 @@ pub unsafe extern "C" fn zarrsArrayGetChunkGridShape(
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
     let chunk_grid_shape = array_fn!(array, chunk_grid_shape);
     if chunk_grid_shape.len() != dimensionality {
         return ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY;
     }
+    // SAFETY: pChunkGridShape points to an array of length dimensionality per the function's safety contract.
     let pChunkGridShape =
         unsafe { std::slice::from_raw_parts_mut(pChunkGridShape, dimensionality) };
     pChunkGridShape.copy_from_slice(chunk_grid_shape);
@@ -297,7 +330,7 @@ pub unsafe extern "C" fn zarrsArrayGetChunkGridShape(
 /// # Safety
 /// If not null, `array` must be a valid `ZarrsArray` handle.
 /// `dimensionality` must match the dimensionality of the array and the length of the arrays pointed to by `pSubsetStart`, `pSubsetShape`, `pChunksStart`, and `pChunksShape`.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsArrayGetChunksInSubset(
     array: ZarrsArray,
     dimensionality: usize,
@@ -309,7 +342,9 @@ pub unsafe extern "C" fn zarrsArrayGetChunksInSubset(
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
+    // SAFETY: pSubsetStart and pSubsetShape point to arrays of length dimensionality per the function's safety contract.
     let subset_start = unsafe { std::slice::from_raw_parts(pSubsetStart, dimensionality) };
     let subset_shape = unsafe { std::slice::from_raw_parts(pSubsetShape, dimensionality) };
     let array_subset = ArraySubset::from(
@@ -318,6 +353,7 @@ pub unsafe extern "C" fn zarrsArrayGetChunksInSubset(
     let shape = array_fn!(array, chunks_in_array_subset, &array_subset);
     match shape {
         Ok(Some(chunks_subset)) => {
+            // SAFETY: pChunksStart and pChunksShape point to arrays of length dimensionality per the function's safety contract.
             let pChunksStart =
                 unsafe { std::slice::from_raw_parts_mut(pChunksStart, dimensionality) };
             pChunksStart.copy_from_slice(chunks_subset.start());
@@ -338,7 +374,7 @@ pub unsafe extern "C" fn zarrsArrayGetChunksInSubset(
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
 /// `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pChunkIndices`.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsArrayGetChunkSize(
     array: ZarrsArray,
     dimensionality: usize,
@@ -349,15 +385,20 @@ pub unsafe extern "C" fn zarrsArrayGetChunkSize(
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
-    let chunk_indices = std::slice::from_raw_parts(pChunkIndices, dimensionality);
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
+    // SAFETY: pChunkIndices points to an array of length dimensionality per the function's safety contract.
+    let chunk_indices = unsafe { std::slice::from_raw_parts(pChunkIndices, dimensionality) };
 
     // Get the chunk size
-    let chunk_representation = array_fn!(array, chunk_array_representation, chunk_indices);
-    match chunk_representation {
-        Ok(chunk_representation) => {
-            if let Some(chunk_size) = chunk_representation.fixed_size() {
-                *chunkSize = chunk_size;
+    let chunk_shape = array_fn!(array, chunk_shape, chunk_indices);
+    match chunk_shape {
+        Ok(chunk_shape) => {
+            let data_type = array_fn!(array, data_type);
+            if let Some(data_type_size) = data_type.fixed_size() {
+                let num_elements: u64 = chunk_shape.iter().map(|d| d.get()).product();
+                // SAFETY: chunkSize is a valid pointer per the function's safety contract.
+                unsafe { *chunkSize = usize::try_from(num_elements).unwrap() * data_type_size };
                 ZarrsResult::ZARRS_SUCCESS
             } else {
                 *LAST_ERROR.lock().unwrap() =
@@ -379,7 +420,7 @@ pub unsafe extern "C" fn zarrsArrayGetChunkSize(
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
 /// `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pChunkIndices` and `pChunkOrigin`.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsArrayGetChunkOrigin(
     array: ZarrsArray,
     dimensionality: usize,
@@ -390,13 +431,16 @@ pub unsafe extern "C" fn zarrsArrayGetChunkOrigin(
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
-    let chunk_indices = std::slice::from_raw_parts(pChunkIndices, dimensionality);
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
+    // SAFETY: pChunkIndices points to an array of length dimensionality per the function's safety contract.
+    let chunk_indices = unsafe { std::slice::from_raw_parts(pChunkIndices, dimensionality) };
 
     // Get the chunk origin
     let chunk_origin = array_fn!(array, chunk_origin, chunk_indices);
     match chunk_origin {
         Ok(chunk_origin) => {
+            // SAFETY: pChunkOrigin points to an array of length dimensionality per the function's safety contract.
             let pChunkOrigin =
                 unsafe { std::slice::from_raw_parts_mut(pChunkOrigin, dimensionality) };
             pChunkOrigin.copy_from_slice(&chunk_origin);
@@ -416,7 +460,7 @@ pub unsafe extern "C" fn zarrsArrayGetChunkOrigin(
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
 /// `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pChunkIndices` and `pChunkShape`.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsArrayGetChunkShape(
     array: ZarrsArray,
     dimensionality: usize,
@@ -427,13 +471,16 @@ pub unsafe extern "C" fn zarrsArrayGetChunkShape(
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
-    let chunk_indices = std::slice::from_raw_parts(pChunkIndices, dimensionality);
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
+    // SAFETY: pChunkIndices points to an array of length dimensionality per the function's safety contract.
+    let chunk_indices = unsafe { std::slice::from_raw_parts(pChunkIndices, dimensionality) };
 
     // Get the chunk shape
     let chunk_shape = array_fn!(array, chunk_shape, chunk_indices);
     match chunk_shape {
         Ok(chunk_shape) => {
+            // SAFETY: pChunkShape points to an array of length dimensionality per the function's safety contract.
             let pChunkShape =
                 unsafe { std::slice::from_raw_parts_mut(pChunkShape, dimensionality) };
             pChunkShape.copy_from_slice(&chunk_shape_to_array_shape(&chunk_shape));
@@ -453,7 +500,7 @@ pub unsafe extern "C" fn zarrsArrayGetChunkShape(
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
 /// `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pSubsetShape`.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsArrayGetSubsetSize(
     array: ZarrsArray,
     dimensionality: usize,
@@ -464,8 +511,10 @@ pub unsafe extern "C" fn zarrsArrayGetSubsetSize(
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
-    let subset_shape = std::slice::from_raw_parts(pSubsetShape, dimensionality);
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
+    // SAFETY: pSubsetShape points to an array of length dimensionality per the function's safety contract.
+    let subset_shape = unsafe { std::slice::from_raw_parts(pSubsetShape, dimensionality) };
 
     // Get the data type
     let data_type = array_fn!(array, data_type);
@@ -475,7 +524,11 @@ pub unsafe extern "C" fn zarrsArrayGetSubsetSize(
     };
 
     // Get the subset size
-    *subsetSize = usize::try_from(subset_shape.iter().product::<u64>()).unwrap() * data_type_size;
+    // SAFETY: subsetSize is a valid pointer per the function's safety contract.
+    unsafe {
+        *subsetSize =
+            usize::try_from(subset_shape.iter().product::<u64>()).unwrap() * data_type_size
+    };
     ZarrsResult::ZARRS_SUCCESS
 }
 
@@ -485,7 +538,7 @@ pub unsafe extern "C" fn zarrsArrayGetSubsetSize(
 ///
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsArrayGetMetadataString(
     array: ZarrsArray,
     pretty: bool,
@@ -495,7 +548,8 @@ pub unsafe extern "C" fn zarrsArrayGetMetadataString(
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
 
     let metadata = array_fn!(array, metadata);
     let metadata_str = if pretty {
@@ -503,11 +557,12 @@ pub unsafe extern "C" fn zarrsArrayGetMetadataString(
     } else {
         serde_json::to_string(&metadata)
     };
-    if let Ok(metadata_str) = metadata_str {
-        if let Ok(cstring) = CString::new(metadata_str) {
-            *pMetadataString = cstring.into_raw();
-            return ZarrsResult::ZARRS_SUCCESS;
-        }
+    if let Ok(metadata_str) = metadata_str
+        && let Ok(cstring) = CString::new(metadata_str)
+    {
+        // SAFETY: pMetadataString is a valid pointer per the function's safety contract.
+        unsafe { *pMetadataString = cstring.into_raw() };
+        return ZarrsResult::ZARRS_SUCCESS;
     }
 
     *LAST_ERROR.lock().unwrap() = "error converting metadata to a json string".to_string();
@@ -520,7 +575,7 @@ pub unsafe extern "C" fn zarrsArrayGetMetadataString(
 ///
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsArrayGetAttributes(
     array: ZarrsArray,
     pretty: bool,
@@ -530,7 +585,8 @@ pub unsafe extern "C" fn zarrsArrayGetAttributes(
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
 
     let attributes = array_fn!(array, attributes);
     let attributes_str = if pretty {
@@ -538,11 +594,12 @@ pub unsafe extern "C" fn zarrsArrayGetAttributes(
     } else {
         serde_json::to_string(&attributes)
     };
-    if let Ok(attributes_str) = attributes_str {
-        if let Ok(cstring) = CString::new(attributes_str) {
-            *pAttributesString = cstring.into_raw();
-            return ZarrsResult::ZARRS_SUCCESS;
-        }
+    if let Ok(attributes_str) = attributes_str
+        && let Ok(cstring) = CString::new(attributes_str)
+    {
+        // SAFETY: pAttributesString is a valid pointer per the function's safety contract.
+        unsafe { *pAttributesString = cstring.into_raw() };
+        return ZarrsResult::ZARRS_SUCCESS;
     }
 
     *LAST_ERROR.lock().unwrap() = "error converting attributes to a json string".to_string();
@@ -555,13 +612,14 @@ pub unsafe extern "C" fn zarrsArrayGetAttributes(
 ///
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsArrayGetAttributesString(
     array: ZarrsArray,
     pretty: bool,
     pAttributesString: *mut *mut c_char,
 ) -> ZarrsResult {
-    zarrsArrayGetAttributes(array, pretty, pAttributesString)
+    // SAFETY: all parameters are passed directly to zarrsArrayGetAttributes which has the same safety contract.
+    unsafe { zarrsArrayGetAttributes(array, pretty, pAttributesString) }
 }
 
 /// Set the array attributes from a JSON string.
@@ -571,7 +629,7 @@ pub unsafe extern "C" fn zarrsArrayGetAttributesString(
 ///
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsArraySetAttributes(
     array: ZarrsArray,
     attributes: FfiStr,
@@ -580,7 +638,8 @@ pub unsafe extern "C" fn zarrsArraySetAttributes(
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &mut **array;
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &mut **array };
 
     // Deserialise the attributes
     let Ok(serde_json::Value::Object(mut attributes)) =

@@ -1,6 +1,9 @@
-use zarrs::{array::Array, array_subset::ArraySubset, storage::ReadableStorageTraits};
+use zarrs::{
+    array::{Array, ArrayBytes, ArraySubset},
+    storage::ReadableStorageTraits,
+};
 
-use crate::{ZarrsResult, LAST_ERROR};
+use crate::{LAST_ERROR, ZarrsResult};
 
 use super::{ZarrsArray, ZarrsArrayEnum};
 
@@ -10,7 +13,7 @@ fn zarrsArrayRetrieveChunkImpl<T: ReadableStorageTraits + ?Sized + 'static>(
     chunk_bytes_length: usize,
     chunk_bytes: *mut u8,
 ) -> ZarrsResult {
-    match array.retrieve_chunk(chunk_indices) {
+    match array.retrieve_chunk::<ArrayBytes>(chunk_indices) {
         Ok(bytes) => {
             let Ok(bytes) = bytes.into_fixed() else {
                 *LAST_ERROR.lock().unwrap() =
@@ -46,7 +49,7 @@ fn zarrsArrayRetrieveChunkImpl<T: ReadableStorageTraits + ?Sized + 'static>(
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
 /// `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pChunkIndices`.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsArrayRetrieveChunk(
     array: ZarrsArray,
     dimensionality: usize,
@@ -57,8 +60,10 @@ pub unsafe extern "C" fn zarrsArrayRetrieveChunk(
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
-    let chunk_indices = std::slice::from_raw_parts(pChunkIndices, dimensionality);
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
+    // SAFETY: pChunkIndices points to an array of length dimensionality per the function's safety contract.
+    let chunk_indices = unsafe { std::slice::from_raw_parts(pChunkIndices, dimensionality) };
 
     // Get the chunk bytes
     match array {
@@ -87,7 +92,7 @@ fn zarrsArrayRetrieveSubsetImpl<T: ReadableStorageTraits + ?Sized + 'static>(
     subset_bytes_length: usize,
     subset_bytes: *mut u8,
 ) -> ZarrsResult {
-    match array.retrieve_array_subset(array_subset) {
+    match array.retrieve_array_subset::<ArrayBytes>(array_subset) {
         Ok(bytes) => {
             let Ok(bytes) = bytes.into_fixed() else {
                 *LAST_ERROR.lock().unwrap() =
@@ -123,7 +128,7 @@ fn zarrsArrayRetrieveSubsetImpl<T: ReadableStorageTraits + ?Sized + 'static>(
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
 /// `dimensionality` must match the dimensionality of the array and the length of the arrays pointed to by `pSubsetStart` and `pSubsetShape`.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsArrayRetrieveSubset(
     array: ZarrsArray,
     dimensionality: usize,
@@ -136,9 +141,11 @@ pub unsafe extern "C" fn zarrsArrayRetrieveSubset(
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
-    let subset_start = std::slice::from_raw_parts(pSubsetStart, dimensionality);
-    let subset_shape = std::slice::from_raw_parts(pSubsetShape, dimensionality);
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
+    // SAFETY: pSubsetStart and pSubsetShape point to arrays of length dimensionality per the function's safety contract.
+    let subset_start = unsafe { std::slice::from_raw_parts(pSubsetStart, dimensionality) };
+    let subset_shape = unsafe { std::slice::from_raw_parts(pSubsetShape, dimensionality) };
     let array_subset = ArraySubset::from(
         std::iter::zip(subset_start, subset_shape).map(|(&start, &shape)| start..start + shape),
     );

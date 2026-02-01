@@ -3,7 +3,7 @@
 #![allow(non_camel_case_types)]
 
 use std::{
-    ffi::{c_char, CString},
+    ffi::{CString, c_char},
     sync::Mutex,
 };
 
@@ -48,7 +48,7 @@ static LAST_ERROR: Lazy<Mutex<String>> = Lazy::new(|| Mutex::new("".to_string())
 /// Get the last error string.
 ///
 /// The string must be freed with `zarrsFreeString`.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub extern "C" fn zarrsLastError() -> *mut c_char {
     let c_str = CString::new(LAST_ERROR.lock().unwrap().as_str()).unwrap();
     c_str.into_raw()
@@ -58,7 +58,7 @@ pub extern "C" fn zarrsLastError() -> *mut c_char {
 ///
 /// # Safety
 /// `array` must be a valid string created by zarrs.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsFreeString(string: *mut c_char) -> ZarrsResult {
     if string.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;

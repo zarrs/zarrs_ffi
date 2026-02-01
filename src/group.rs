@@ -1,13 +1,13 @@
 pub mod group_write;
 
-use std::ffi::{c_char, CString};
+use std::ffi::{CString, c_char};
 
 use ffi_support::FfiStr;
 use zarrs::group::{Group, GroupMetadata};
 
 use crate::{
+    LAST_ERROR, ZarrsResult,
     storage::{ZarrsStorage, ZarrsStorageEnum},
-    ZarrsResult, LAST_ERROR,
 };
 
 #[doc(hidden)]
@@ -76,7 +76,7 @@ pub type ZarrsGroup = *mut ZarrsGroup_T;
 ///
 /// # Safety
 /// `pGroup` must be a valid pointer to a `ZarrsGroup` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsOpenGroupRW(
     storage: ZarrsStorage,
     path: FfiStr,
@@ -87,12 +87,16 @@ pub unsafe extern "C" fn zarrsOpenGroupRW(
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
 
-    let storage = &**storage;
+    // SAFETY: storage is not null, and the caller guarantees it is a valid ZarrsStorage handle.
+    let storage = unsafe { &**storage };
 
     if let ZarrsStorageEnum::RW(storage) = storage {
         match Group::open(storage.clone(), path.into()) {
             Ok(group) => {
-                *pGroup = Box::into_raw(Box::new(ZarrsGroup_T(ZarrsGroupEnum::RW(group))));
+                // SAFETY: pGroup is a valid pointer per the function's safety contract.
+                unsafe {
+                    *pGroup = Box::into_raw(Box::new(ZarrsGroup_T(ZarrsGroupEnum::RW(group))));
+                }
                 ZarrsResult::ZARRS_SUCCESS
             }
             Err(err) => {
@@ -113,7 +117,7 @@ pub unsafe extern "C" fn zarrsOpenGroupRW(
 ///
 /// # Safety
 /// `pGroup` must be a valid pointer to a `ZarrsGroup` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsCreateGroupRW(
     storage: ZarrsStorage,
     path: FfiStr,
@@ -125,7 +129,8 @@ pub unsafe extern "C" fn zarrsCreateGroupRW(
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
 
-    let storage = &**storage;
+    // SAFETY: storage is not null, and the caller guarantees it is a valid ZarrsStorage handle.
+    let storage = unsafe { &**storage };
 
     let metadata = match GroupMetadata::try_from(metadata.as_str()) {
         Ok(metadata) => metadata,
@@ -138,7 +143,10 @@ pub unsafe extern "C" fn zarrsCreateGroupRW(
     if let ZarrsStorageEnum::RW(storage) = storage {
         match Group::new_with_metadata(storage.clone(), path.into(), metadata) {
             Ok(group) => {
-                *pGroup = Box::into_raw(Box::new(ZarrsGroup_T(ZarrsGroupEnum::RW(group))));
+                // SAFETY: pGroup is a valid pointer per the function's safety contract.
+                unsafe {
+                    *pGroup = Box::into_raw(Box::new(ZarrsGroup_T(ZarrsGroupEnum::RW(group))));
+                }
                 ZarrsResult::ZARRS_SUCCESS
             }
             Err(err) => {
@@ -159,11 +167,12 @@ pub unsafe extern "C" fn zarrsCreateGroupRW(
 ///
 /// # Safety
 /// If not null, `group` must be a valid `ZarrsGroup` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsDestroyGroup(group: ZarrsGroup) -> ZarrsResult {
     if group.is_null() {
         ZarrsResult::ZARRS_ERROR_NULL_PTR
     } else {
+        // SAFETY: group is not null, and the caller guarantees it is a valid ZarrsGroup handle.
         unsafe { group.to_owned().drop_in_place() };
         ZarrsResult::ZARRS_SUCCESS
     }
@@ -175,7 +184,7 @@ pub unsafe extern "C" fn zarrsDestroyGroup(group: ZarrsGroup) -> ZarrsResult {
 ///
 /// # Safety
 /// `group` must be a valid `ZarrsGroup` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsGroupGetAttributes(
     group: ZarrsGroup,
     pretty: bool,
@@ -185,7 +194,8 @@ pub unsafe extern "C" fn zarrsGroupGetAttributes(
     if group.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let group = &**group;
+    // SAFETY: group is not null, and the caller guarantees it is a valid ZarrsGroup handle.
+    let group = unsafe { &**group };
 
     let attributes = group_fn!(group, attributes);
     let attributes_str = if pretty {
@@ -193,11 +203,12 @@ pub unsafe extern "C" fn zarrsGroupGetAttributes(
     } else {
         serde_json::to_string(&attributes)
     };
-    if let Ok(attributes_str) = attributes_str {
-        if let Ok(cstring) = CString::new(attributes_str) {
-            *pAttributesString = cstring.into_raw();
-            return ZarrsResult::ZARRS_SUCCESS;
-        }
+    if let Ok(attributes_str) = attributes_str
+        && let Ok(cstring) = CString::new(attributes_str)
+    {
+        // SAFETY: pAttributesString is a valid pointer per the function's safety contract.
+        unsafe { *pAttributesString = cstring.into_raw() };
+        return ZarrsResult::ZARRS_SUCCESS;
     }
 
     *LAST_ERROR.lock().unwrap() = "error converting attributes to a json string".to_string();
@@ -211,7 +222,7 @@ pub unsafe extern "C" fn zarrsGroupGetAttributes(
 ///
 /// # Safety
 /// `group` must be a valid `ZarrsGroup` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsGroupSetAttributes(
     group: ZarrsGroup,
     attributes: FfiStr,
@@ -220,7 +231,8 @@ pub unsafe extern "C" fn zarrsGroupSetAttributes(
     if group.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let group = &mut **group;
+    // SAFETY: group is not null, and the caller guarantees it is a valid ZarrsGroup handle.
+    let group = unsafe { &mut **group };
 
     // Deserialise the attributes
     let Ok(serde_json::Value::Object(mut attributes)) =

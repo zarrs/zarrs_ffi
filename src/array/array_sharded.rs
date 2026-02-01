@@ -1,15 +1,14 @@
 use zarrs::{
     array::{
-        chunk_shape_to_array_shape, codec::CodecOptions, Array, ArrayShardedExt,
-        ArrayShardedReadableExt, ArrayShardedReadableExtCache,
+        Array, ArrayBytes, ArrayShardedExt, ArrayShardedReadableExt, ArrayShardedReadableExtCache,
+        ArraySubset, CodecOptions, chunk_shape_to_array_shape,
     },
-    array_subset::ArraySubset,
     storage::ReadableStorageTraits,
 };
 
-use crate::{ZarrsResult, LAST_ERROR};
+use crate::{LAST_ERROR, ZarrsResult};
 
-use super::{array_fn, ZarrsArray, ZarrsArrayEnum};
+use super::{ZarrsArray, ZarrsArrayEnum, array_fn};
 
 #[doc(hidden)]
 pub struct ZarrsShardIndexCache_T(pub ArrayShardedReadableExtCache);
@@ -26,7 +25,7 @@ pub type ZarrsShardIndexCache = *mut ZarrsShardIndexCache_T;
 
 /// Get the shape of the inner chunk grid of a sharded array.
 ///
-/// If the array is not sharded, the contents of `pInnerChunkGridShape` will equal the standard chunk grid shape.
+/// If the array is not sharded, the contents of `pSubChunkGridShape` will equal the standard chunk grid shape.
 ///
 /// # Errors
 /// - Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
@@ -34,62 +33,68 @@ pub type ZarrsShardIndexCache = *mut ZarrsShardIndexCache_T;
 ///
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
-/// `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pInnerChunkGridShape`.
-#[no_mangle]
-pub unsafe extern "C" fn zarrsArrayGetInnerChunkGridShape(
+/// `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pSubChunkGridShape`.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn zarrsArrayGetSubChunkGridShape(
     array: ZarrsArray,
     dimensionality: usize,
-    pInnerChunkGridShape: *mut u64,
+    pSubChunkGridShape: *mut u64,
 ) -> ZarrsResult {
     // Validation
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
 
-    // Get the inner chunk grid shape
-    let inner_chunk_grid_shape = array_fn!(array, inner_chunk_grid_shape);
-    if inner_chunk_grid_shape.len() != dimensionality {
+    // Get the subchunk grid shape
+    let subchunk_grid_shape = array_fn!(array, subchunk_grid_shape);
+    if subchunk_grid_shape.len() != dimensionality {
         return ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY;
     }
-    let pInnerChunkShape =
-        unsafe { std::slice::from_raw_parts_mut(pInnerChunkGridShape, dimensionality) };
-    pInnerChunkShape.copy_from_slice(&inner_chunk_grid_shape);
+    // SAFETY: pSubChunkGridShape points to an array of length dimensionality per the function's safety contract.
+    let pSubChunkShape =
+        unsafe { std::slice::from_raw_parts_mut(pSubChunkGridShape, dimensionality) };
+    pSubChunkShape.copy_from_slice(&subchunk_grid_shape);
     ZarrsResult::ZARRS_SUCCESS
 }
 
 /// Get the inner chunk shape for a sharded array.
 ///
 /// `pIsSharded` is set to true if the array is sharded, otherwise false.
-/// If the array is not sharded, the contents of `pInnerChunkShape` will be undefined.
+/// If the array is not sharded, the contents of `pSubChunkShape` will be undefined.
 ///
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
 /// `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pChunkShape`.
-#[no_mangle]
-pub unsafe extern "C" fn zarrsArrayGetInnerChunkShape(
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn zarrsArrayGetSubChunkShape(
     array: ZarrsArray,
     dimensionality: usize,
     pIsSharded: *mut bool,
-    pInnerChunkShape: *mut u64,
+    pSubChunkShape: *mut u64,
 ) -> ZarrsResult {
     // Validation
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
 
     // Get the inner chunk shape
-    let inner_chunk_shape = array_fn!(array, inner_chunk_shape);
-    match inner_chunk_shape {
-        Some(inner_chunk_shape) => {
-            let pInnerChunkShape =
-                unsafe { std::slice::from_raw_parts_mut(pInnerChunkShape, dimensionality) };
-            pInnerChunkShape.copy_from_slice(&chunk_shape_to_array_shape(&inner_chunk_shape));
-            *pIsSharded = true;
+    let subchunk_shape = array_fn!(array, subchunk_shape);
+    match subchunk_shape {
+        Some(subchunk_shape) => {
+            // SAFETY: pSubChunkShape points to an array of length dimensionality per the function's safety contract.
+            let pSubChunkShape =
+                unsafe { std::slice::from_raw_parts_mut(pSubChunkShape, dimensionality) };
+            pSubChunkShape.copy_from_slice(&chunk_shape_to_array_shape(&subchunk_shape));
+            // SAFETY: pIsSharded is a valid pointer per the function's safety contract.
+            unsafe { *pIsSharded = true };
         }
         None => {
-            *pIsSharded = false;
+            // SAFETY: pIsSharded is a valid pointer per the function's safety contract.
+            unsafe { *pIsSharded = false };
         }
     }
     ZarrsResult::ZARRS_SUCCESS
@@ -102,7 +107,7 @@ pub unsafe extern "C" fn zarrsArrayGetInnerChunkShape(
 ///
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsCreateShardIndexCache(
     array: ZarrsArray,
     pShardIndexCache: *mut ZarrsShardIndexCache,
@@ -111,23 +116,33 @@ pub unsafe extern "C" fn zarrsCreateShardIndexCache(
     if array.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
 
     match array {
         ZarrsArrayEnum::R(array) => {
-            *pShardIndexCache = Box::into_raw(Box::new(ZarrsShardIndexCache_T(
-                ArrayShardedReadableExtCache::new(array),
-            )));
+            // SAFETY: pShardIndexCache is a valid pointer per the function's safety contract.
+            unsafe {
+                *pShardIndexCache = Box::into_raw(Box::new(ZarrsShardIndexCache_T(
+                    ArrayShardedReadableExtCache::new(array),
+                )));
+            }
         }
         ZarrsArrayEnum::RW(array) => {
-            *pShardIndexCache = Box::into_raw(Box::new(ZarrsShardIndexCache_T(
-                ArrayShardedReadableExtCache::new(array),
-            )));
+            // SAFETY: pShardIndexCache is a valid pointer per the function's safety contract.
+            unsafe {
+                *pShardIndexCache = Box::into_raw(Box::new(ZarrsShardIndexCache_T(
+                    ArrayShardedReadableExtCache::new(array),
+                )));
+            }
         }
         ZarrsArrayEnum::RWL(array) => {
-            *pShardIndexCache = Box::into_raw(Box::new(ZarrsShardIndexCache_T(
-                ArrayShardedReadableExtCache::new(array),
-            )));
+            // SAFETY: pShardIndexCache is a valid pointer per the function's safety contract.
+            unsafe {
+                *pShardIndexCache = Box::into_raw(Box::new(ZarrsShardIndexCache_T(
+                    ArrayShardedReadableExtCache::new(array),
+                )));
+            }
         }
         _ => {
             *LAST_ERROR.lock().unwrap() = "storage does not have read capability".to_string();
@@ -145,26 +160,28 @@ pub unsafe extern "C" fn zarrsCreateShardIndexCache(
 ///
 /// # Safety
 /// If not null, `shardIndexCache` must be a valid `ZarrsShardIndexCache` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsDestroyShardIndexCache(
     shardIndexCache: ZarrsShardIndexCache,
 ) -> ZarrsResult {
     if shardIndexCache.is_null() {
         ZarrsResult::ZARRS_ERROR_NULL_PTR
     } else {
+        // SAFETY: shardIndexCache is not null, and the caller guarantees it is a valid ZarrsShardIndexCache handle.
         unsafe { shardIndexCache.to_owned().drop_in_place() };
         ZarrsResult::ZARRS_SUCCESS
     }
 }
 
-fn zarrsArrayRetrieveInnerChunkImpl<T: ReadableStorageTraits + ?Sized + 'static>(
+fn zarrsArrayRetrieveSubChunkImpl<T: ReadableStorageTraits + ?Sized + 'static>(
     array: &Array<T>,
     cache: &ArrayShardedReadableExtCache,
     chunk_indices: &[u64],
     chunk_bytes_length: usize,
     chunk_bytes: *mut u8,
 ) -> ZarrsResult {
-    match array.retrieve_inner_chunk_opt(cache, chunk_indices, &CodecOptions::default()) {
+    match array.retrieve_subchunk_opt::<ArrayBytes>(cache, chunk_indices, &CodecOptions::default())
+    {
         Ok(bytes) => {
             let Ok(bytes) = bytes.into_fixed() else {
                 *LAST_ERROR.lock().unwrap() =
@@ -200,8 +217,8 @@ fn zarrsArrayRetrieveInnerChunkImpl<T: ReadableStorageTraits + ?Sized + 'static>
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
 /// `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pChunkIndices`.
-#[no_mangle]
-pub unsafe extern "C" fn zarrsArrayRetrieveInnerChunk(
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn zarrsArrayRetrieveSubChunk(
     array: ZarrsArray,
     cache: ZarrsShardIndexCache,
     dimensionality: usize,
@@ -212,34 +229,37 @@ pub unsafe extern "C" fn zarrsArrayRetrieveInnerChunk(
     if array.is_null() || cache.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
-    let cache = &**cache;
-    let chunk_indices = std::slice::from_raw_parts(pChunkIndices, dimensionality);
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
+    // SAFETY: cache is not null, and the caller guarantees it is a valid ZarrsShardIndexCache handle.
+    let cache = unsafe { &**cache };
+    // SAFETY: pChunkIndices points to an array of length dimensionality per the function's safety contract.
+    let chunk_indices = unsafe { std::slice::from_raw_parts(pChunkIndices, dimensionality) };
 
     // Get the chunk bytes
     match array {
-        ZarrsArrayEnum::R(array) => zarrsArrayRetrieveInnerChunkImpl(
+        ZarrsArrayEnum::R(array) => zarrsArrayRetrieveSubChunkImpl(
             array,
             cache,
             chunk_indices,
             chunkBytesCount,
             pChunkBytes,
         ),
-        ZarrsArrayEnum::RL(array) => zarrsArrayRetrieveInnerChunkImpl(
+        ZarrsArrayEnum::RL(array) => zarrsArrayRetrieveSubChunkImpl(
             array,
             cache,
             chunk_indices,
             chunkBytesCount,
             pChunkBytes,
         ),
-        ZarrsArrayEnum::RW(array) => zarrsArrayRetrieveInnerChunkImpl(
+        ZarrsArrayEnum::RW(array) => zarrsArrayRetrieveSubChunkImpl(
             array,
             cache,
             chunk_indices,
             chunkBytesCount,
             pChunkBytes,
         ),
-        ZarrsArrayEnum::RWL(array) => zarrsArrayRetrieveInnerChunkImpl(
+        ZarrsArrayEnum::RWL(array) => zarrsArrayRetrieveSubChunkImpl(
             array,
             cache,
             chunk_indices,
@@ -260,7 +280,11 @@ fn zarrsArrayRetrieveSubsetShardedImpl<T: ReadableStorageTraits + ?Sized + 'stat
     subset_bytes_length: usize,
     subset_bytes: *mut u8,
 ) -> ZarrsResult {
-    match array.retrieve_array_subset_sharded_opt(cache, array_subset, &CodecOptions::default()) {
+    match array.retrieve_array_subset_sharded_opt::<ArrayBytes>(
+        cache,
+        array_subset,
+        &CodecOptions::default(),
+    ) {
         Ok(bytes) => {
             let Ok(bytes) = bytes.into_fixed() else {
                 *LAST_ERROR.lock().unwrap() =
@@ -298,7 +322,7 @@ fn zarrsArrayRetrieveSubsetShardedImpl<T: ReadableStorageTraits + ?Sized + 'stat
 /// # Safety
 /// `array` must be a valid `ZarrsArray` handle.
 /// `dimensionality` must match the dimensionality of the array and the length of the arrays pointed to by `pSubsetStart` and `pSubsetShape`.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsArrayRetrieveSubsetSharded(
     array: ZarrsArray,
     cache: ZarrsShardIndexCache,
@@ -312,10 +336,13 @@ pub unsafe extern "C" fn zarrsArrayRetrieveSubsetSharded(
     if array.is_null() || cache.is_null() {
         return ZarrsResult::ZARRS_ERROR_NULL_PTR;
     }
-    let array = &**array;
-    let cache = &**cache;
-    let subset_start = std::slice::from_raw_parts(pSubsetStart, dimensionality);
-    let subset_shape = std::slice::from_raw_parts(pSubsetShape, dimensionality);
+    // SAFETY: array is not null, and the caller guarantees it is a valid ZarrsArray handle.
+    let array = unsafe { &**array };
+    // SAFETY: cache is not null, and the caller guarantees it is a valid ZarrsShardIndexCache handle.
+    let cache = unsafe { &**cache };
+    // SAFETY: pSubsetStart and pSubsetShape point to arrays of length dimensionality per the function's safety contract.
+    let subset_start = unsafe { std::slice::from_raw_parts(pSubsetStart, dimensionality) };
+    let subset_shape = unsafe { std::slice::from_raw_parts(pSubsetShape, dimensionality) };
     let array_subset = ArraySubset::from(
         std::iter::zip(subset_start, subset_shape).map(|(&start, &shape)| start..start + shape),
     );

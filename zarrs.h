@@ -224,38 +224,6 @@ ZarrsResult zarrsArrayGetDataType(ZarrsArray array, ZarrsDataType *pDataType);
 ZarrsResult zarrsArrayGetDimensionality(ZarrsArray array, size_t *dimensionality);
 
 /**
- * Get the shape of the inner chunk grid of a sharded array.
- *
- * If the array is not sharded, the contents of `pInnerChunkGridShape` will equal the standard chunk grid shape.
- *
- * # Errors
- * - Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
- * - Returns `ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY` if `dimensionality` does not match the array dimensionality.
- *
- * # Safety
- * `array` must be a valid `ZarrsArray` handle.
- * `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pInnerChunkGridShape`.
- */
-ZarrsResult zarrsArrayGetInnerChunkGridShape(ZarrsArray array,
-                                             size_t dimensionality,
-                                             uint64_t *pInnerChunkGridShape);
-
-/**
- * Get the inner chunk shape for a sharded array.
- *
- * `pIsSharded` is set to true if the array is sharded, otherwise false.
- * If the array is not sharded, the contents of `pInnerChunkShape` will be undefined.
- *
- * # Safety
- * `array` must be a valid `ZarrsArray` handle.
- * `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pChunkShape`.
- */
-ZarrsResult zarrsArrayGetInnerChunkShape(ZarrsArray array,
-                                         size_t dimensionality,
-                                         bool *pIsSharded,
-                                         uint64_t *pInnerChunkShape);
-
-/**
  * Get the array metadata as a JSON string.
  *
  * The string must be freed with `zarrsFreeString`.
@@ -279,6 +247,38 @@ ZarrsResult zarrsArrayGetMetadataString(ZarrsArray array, bool pretty, char **pM
 ZarrsResult zarrsArrayGetShape(ZarrsArray array,
                                size_t dimensionality,
                                uint64_t *pShape);
+
+/**
+ * Get the shape of the inner chunk grid of a sharded array.
+ *
+ * If the array is not sharded, the contents of `pSubChunkGridShape` will equal the standard chunk grid shape.
+ *
+ * # Errors
+ * - Returns `ZarrsResult::ZARRS_ERROR_NULL_PTR` if `array` is a null pointer.
+ * - Returns `ZarrsResult::ZARRS_ERROR_INCOMPATIBLE_DIMENSIONALITY` if `dimensionality` does not match the array dimensionality.
+ *
+ * # Safety
+ * `array` must be a valid `ZarrsArray` handle.
+ * `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pSubChunkGridShape`.
+ */
+ZarrsResult zarrsArrayGetSubChunkGridShape(ZarrsArray array,
+                                           size_t dimensionality,
+                                           uint64_t *pSubChunkGridShape);
+
+/**
+ * Get the inner chunk shape for a sharded array.
+ *
+ * `pIsSharded` is set to true if the array is sharded, otherwise false.
+ * If the array is not sharded, the contents of `pSubChunkShape` will be undefined.
+ *
+ * # Safety
+ * `array` must be a valid `ZarrsArray` handle.
+ * `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pChunkShape`.
+ */
+ZarrsResult zarrsArrayGetSubChunkShape(ZarrsArray array,
+                                       size_t dimensionality,
+                                       bool *pIsSharded,
+                                       uint64_t *pSubChunkShape);
 
 /**
  * Get the size of a subset in bytes.
@@ -326,12 +326,12 @@ ZarrsResult zarrsArrayRetrieveChunk(ZarrsArray array,
  * `array` must be a valid `ZarrsArray` handle.
  * `dimensionality` must match the dimensionality of the array and the length of the array pointed to by `pChunkIndices`.
  */
-ZarrsResult zarrsArrayRetrieveInnerChunk(ZarrsArray array,
-                                         ZarrsShardIndexCache cache,
-                                         size_t dimensionality,
-                                         const uint64_t *pChunkIndices,
-                                         size_t chunkBytesCount,
-                                         uint8_t *pChunkBytes);
+ZarrsResult zarrsArrayRetrieveSubChunk(ZarrsArray array,
+                                       ZarrsShardIndexCache cache,
+                                       size_t dimensionality,
+                                       const uint64_t *pChunkIndices,
+                                       size_t chunkBytesCount,
+                                       uint8_t *pChunkBytes);
 
 /**
  * Retrieve a subset from an array.

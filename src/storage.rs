@@ -1,7 +1,7 @@
 use ffi_support::FfiStr;
 use std::sync::Arc;
 
-use crate::{ZarrsResult, LAST_ERROR};
+use crate::{LAST_ERROR, ZarrsResult};
 
 #[doc(hidden)]
 #[allow(clippy::upper_case_acronyms)]
@@ -33,7 +33,7 @@ pub type ZarrsStorage = *mut ZarrsStorage_T;
 ///
 /// # Safety
 /// `pStorage` must be a valid pointer to a `ZarrsStorage` handle.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsCreateStorageFilesystem(
     path: FfiStr,
     pStorage: *mut ZarrsStorage,
@@ -41,9 +41,12 @@ pub unsafe extern "C" fn zarrsCreateStorageFilesystem(
     let path = std::path::Path::new(path.as_str());
     match zarrs::filesystem::FilesystemStore::new(path) {
         Ok(store) => {
-            *pStorage = Box::into_raw(Box::new(ZarrsStorage_T(ZarrsStorageEnum::RW(Arc::new(
-                store,
-            )))));
+            // SAFETY: pStorage is a valid pointer per the function's safety contract.
+            unsafe {
+                *pStorage = Box::into_raw(Box::new(ZarrsStorage_T(ZarrsStorageEnum::RW(
+                    Arc::new(store),
+                ))));
+            }
             ZarrsResult::ZARRS_SUCCESS
         }
         Err(err) => {
@@ -60,11 +63,12 @@ pub unsafe extern "C" fn zarrsCreateStorageFilesystem(
 ///
 /// # Safety
 /// If not null, `storage` must be a valid storage device created with a `zarrsStorage` function.
-#[no_mangle]
+#[unsafe(no_mangle)]
 pub unsafe extern "C" fn zarrsDestroyStorage(storage: ZarrsStorage) -> ZarrsResult {
     if storage.is_null() {
         ZarrsResult::ZARRS_ERROR_NULL_PTR
     } else {
+        // SAFETY: storage is not null, and the caller guarantees it is a valid ZarrsStorage handle.
         unsafe { storage.to_owned().drop_in_place() };
         ZarrsResult::ZARRS_SUCCESS
     }
