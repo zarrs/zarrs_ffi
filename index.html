@@ -141,7 +141,7 @@ CMake Quickstart</h1>
 <li>Install the Rust compiler (and cargo).</li>
 <li>Put <a href="https://github.com/LDeakin/zarrs_ffi/blob/main/examples/Findzarrs.cmake">Findzarrs.cmake</a> in your <code>CMAKE_MODULE_PATH</code></li>
 <li><code>find_package(zarrs &lt;version&gt; REQUIRED COMPONENTS zarrs/bz2)</code><ul>
-<li>Replace <code>&lt;version&gt;</code> with the latest release: <a href="https://crates.io/crates/zarrs_ffi"><img src="https://img.shields.io/crates/v/zarrs_ffi.svg" alt="Latest Version" style="pointer-events: none;" class="inline"/></a> (e.g., <code>0.9</code> or <code>0.9.4</code>)</li>
+<li>Replace <code>&lt;version&gt;</code> with the latest release: <a href="https://crates.io/crates/zarrs_ffi"><img src="https://img.shields.io/crates/v/zarrs_ffi.svg" alt="Latest Version" style="pointer-events: none;" class="inline"/></a> (e.g., <code>0.10</code> or <code>0.10.0</code>)</li>
 <li><a href="https://github.com/LDeakin/zarrs"><code>zarrs</code></a> is retrieved from <code>GitHub</code> using <a href="https://cmake.org/cmake/help/latest/module/FetchContent.html">FetchContent</a> and built using <a href="https://github.com/corrosion-rs/corrosion">corrosion</a></li>
 <li>Components are optional <a href="https://github.com/LDeakin/zarrs"><code>zarrs</code></a> codecs</li>
 </ul>
