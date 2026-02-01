@@ -26,7 +26,7 @@ pub enum ZarrsGroupEnum {
     RWL(Group<dyn zarrs::storage::ReadableWritableListableStorageTraits>),
 }
 
-macro_rules! group_fn {
+macro_rules! _group_fn {
     ($group:expr, $fn:ident ) => {
         match $group {
             crate::group::ZarrsGroupEnum::R(group) => group.$fn(),
@@ -49,7 +49,7 @@ macro_rules! group_fn {
     };
 }
 
-pub(crate) use group_fn;
+pub(crate) use _group_fn as group_fn;
 
 #[doc(hidden)]
 pub struct ZarrsGroup_T(pub ZarrsGroupEnum);
