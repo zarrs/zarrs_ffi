@@ -34,4 +34,4 @@ zarrs = "0.23.0"
 
 [patch.crates-io]
 # zarrs = { path = "../zarrs/zarrs" }
-zarrs = { git = "https://github.com/zarrs/zarrs.git", branch = "0.23.0_release" }
+# zarrs = { git = "https://github.com/zarrs/zarrs.git", branch = "0.23.0_release" }
